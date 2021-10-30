@@ -1,6 +1,8 @@
 package cz.langsamu.tjv.baseballdatabase.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -16,13 +18,20 @@ public class Stadium {
             generator = "stadium_sequence"
 
     )
-    private Long id;
+    private Long stadiumID;
+    //@Column(nullable = false)
     private String name;
+    //@Column(nullable = false)
     private int capacity;
+    //@Column(nullable = false)
     private String city;
 
+    @ManyToOne
+    @JoinColumn(name = "teamID",nullable = false)
+    private  Team team;
+
     public Stadium(Long id, String name, int capacity, String city) {
-        this.id = id;
+        this.stadiumID = id;
         this.name = name;
         this.capacity = capacity;
         this.city = city;
@@ -38,8 +47,8 @@ public class Stadium {
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getStadiumID() {
+        return stadiumID;
     }
 
     public String getName() {
@@ -52,5 +61,17 @@ public class Stadium {
 
     public String getCity() {
         return city;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

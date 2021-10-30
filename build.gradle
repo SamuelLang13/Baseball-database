@@ -6,7 +6,7 @@ plugins {
 
 group = 'cz.langsamu.tjv'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = "16"
 
 configurations {
 	compileOnly {
@@ -43,3 +43,4 @@ dependencyManagement {
 test {
 	useJUnitPlatform()
 }
+targetCompatibility = JavaVersion.VERSION_16

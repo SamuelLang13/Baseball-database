@@ -2,56 +2,95 @@ package cz.langsamu.tjv.baseballdatabase.domain;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table
 public class Player {
     @Id
-    @SequenceGenerator(
-            name="player_sequence",
-            sequenceName = "player_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "player_sequence"
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long playerID;
 
-    )
-    private Long id;
-    private String first_name;
-    private String second_name;
+    //@Column(nullable = false)
+    private String firstName;
+    //@Column(nullable = false)
+    private String secondName;
+    //@Column(nullable = false)
     private BaseballPositions baseballPosition;
+
+    @ManyToMany
+    @JoinTable(name = "players_teams_table",
+            joinColumns = @JoinColumn(name = "team_ID"),
+            inverseJoinColumns = @JoinColumn(name = "player_ID"))
+    private Set<Team> teams = new HashSet<>();
 
     public Player(){
 
     }
 
     public Player(Long id, String first_name, String second_name, BaseballPositions baseballPosition) {
-        this.id = id;
-        this.first_name = first_name;
-        this.second_name = second_name;
+        this.playerID = id;
+        this.firstName = first_name;
+        this.secondName = second_name;
         this.baseballPosition = baseballPosition;
     }
 
     public Player(String first_name, String second_name, BaseballPositions baseballPosition) {
-        this.first_name = first_name;
-        this.second_name = second_name;
+        this.firstName = first_name;
+        this.secondName = second_name;
         this.baseballPosition = baseballPosition;
     }
 
-    public Long getId() {
-        return id;
+    public Long getPlayerID() {
+        return playerID;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getSecond_name() {
-        return second_name;
+    public String getSecondName() {
+        return secondName;
     }
 
     public BaseballPositions getBaseballPosition() {
         return baseballPosition;
+    }
+
+    public void setFirstName(String first_name) {
+        this.firstName = first_name;
+    }
+
+    public void setSecondName(String second_name) {
+        this.secondName = second_name;
+    }
+
+    public void setBaseballPosition(BaseballPositions baseballPosition) {
+        this.baseballPosition = baseballPosition;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Player)) return false;
+        Player player = (Player) o;
+        return Objects.equals(playerID, player.playerID) && Objects.equals(firstName, player.firstName) && Objects.equals(secondName, player.secondName) && baseballPosition == player.baseballPosition;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerID, firstName, secondName, baseballPosition);
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + playerID +
+                ", first_name='" + firstName + '\'' +
+                ", second_name='" + secondName + '\'' +
+                ", baseballPosition=" + baseballPosition +
+                '}';
     }
 }

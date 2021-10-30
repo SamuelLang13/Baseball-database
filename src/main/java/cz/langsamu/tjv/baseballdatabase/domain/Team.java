@@ -2,6 +2,8 @@ package cz.langsamu.tjv.baseballdatabase.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -17,14 +19,26 @@ public class Team {
             generator = "team_sequence"
 
     )
-    private Long id;
+    private Long teamID;
+    //@Column(nullable = false)
     private String name;
+    //@Column(nullable = false)
     private Leagues league;
+    //@Column(nullable = false)
     private Date yearOfEstablish;
+    //@Column(nullable = false)
     private int numOfWorldSeriesWin;
 
+
+    @ManyToMany
+    @JoinTable(name = "players_teams_table",
+                joinColumns = @JoinColumn(name = "playerID"),
+                inverseJoinColumns = @JoinColumn(name = "teamID"))
+    private Set<Player> players = new HashSet<>();
+
+
     public Team(Long id, String name, Leagues league, Date yearOfEstablish, int numOfWorldSeriesWin) {
-        this.id = id;
+        this.teamID = id;
         this.name = name;
         this.league = league;
         this.yearOfEstablish = yearOfEstablish;
@@ -32,7 +46,7 @@ public class Team {
     }
 
     public Team(Long id, String name, Leagues league, Date yearOfEstablish) {
-        this.id = id;
+        this.teamID = id;
         this.name = name;
         this.league = league;
         this.yearOfEstablish = yearOfEstablish;
@@ -57,8 +71,8 @@ public class Team {
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getTeamID() {
+        return teamID;
     }
 
     public String getName() {
@@ -76,4 +90,21 @@ public class Team {
     public int getNumOfWorldSeriesWin() {
         return numOfWorldSeriesWin;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLeague(Leagues league) {
+        this.league = league;
+    }
+
+    public void setYearOfEstablish(Date yearOfEstablish) {
+        this.yearOfEstablish = yearOfEstablish;
+    }
+
+    public void setNumOfWorldSeriesWin(int numOfWorldSeriesWin) {
+        this.numOfWorldSeriesWin = numOfWorldSeriesWin;
+    }
+
 }
