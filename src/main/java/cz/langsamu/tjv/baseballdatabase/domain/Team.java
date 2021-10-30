@@ -29,14 +29,6 @@ public class Team {
     //@Column(nullable = false)
     private int numOfWorldSeriesWin;
 
-
-    @ManyToMany
-    @JoinTable(name = "players_teams_table",
-                joinColumns = @JoinColumn(name = "playerID"),
-                inverseJoinColumns = @JoinColumn(name = "teamID"))
-    private Set<Player> players = new HashSet<>();
-
-
     public Team(Long id, String name, Leagues league, Date yearOfEstablish, int numOfWorldSeriesWin) {
         this.teamID = id;
         this.name = name;

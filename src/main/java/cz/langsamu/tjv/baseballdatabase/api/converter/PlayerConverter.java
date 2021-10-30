@@ -15,8 +15,8 @@ public class PlayerConverter {
         return new PlayerDTO(player.getPlayerID(),player.getFirstName(), player.getSecondName(), player.getBaseballPosition());
     }
 
-    public static Collection<Player> toModels(Collection<PlayerDTO> playerDTOS){
-        return playerDTOS.stream().map(PlayerConverter::toModel).toList();
+    public static Collection<Player> toModels(Collection<PlayerDTO> playerDTO){
+        return playerDTO.stream().map(PlayerConverter::toModel).toList();
     }
 
     public static Collection<PlayerDTO> fromModels(Collection<Player> player){

@@ -20,11 +20,15 @@ public class Player {
     //@Column(nullable = false)
     private BaseballPositions baseballPosition;
 
+    @ManyToOne
+    @JoinColumn(name = "teamID",nullable = false)
+    private  Team team;
+
     @ManyToMany
-    @JoinTable(name = "players_teams_table",
-            joinColumns = @JoinColumn(name = "team_ID"),
-            inverseJoinColumns = @JoinColumn(name = "player_ID"))
-    private Set<Team> teams = new HashSet<>();
+    @JoinTable(name = "player_award_table",
+            joinColumns=@JoinColumn(name = "awardID"),
+            inverseJoinColumns = @JoinColumn(name = "playerID"))
+    private final Set<Award> awards = new HashSet<>();
 
     public Player(){
 
