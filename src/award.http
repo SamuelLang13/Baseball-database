@@ -1,0 +1,37 @@
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "CY YOUNG"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Golden Glove"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Golden Slugger Awards"
+}
+
+###
+GET localhost:8080/awards
+
+###
+DELETE localhost:8080/awards/18
+
+###
+PUT localhost:8080/awards/21
+Content-Type: application/json
+
+{
+  "name": "Silver Slugger Awards"
+}

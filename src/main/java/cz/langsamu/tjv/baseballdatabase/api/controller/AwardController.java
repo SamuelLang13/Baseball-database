@@ -33,8 +33,7 @@ public class AwardController {
 
     @PostMapping
     public AwardDTO registerNewAward(@RequestBody AwardDTO awardDTO){
-        awardService.create(AwardConverter.toModel(awardDTO));
-        return getOneAward(awardDTO.getAwardID());
+       return AwardConverter.fromModel(awardService.create(AwardConverter.toModel(awardDTO)));
     }
 
     @DeleteMapping("/{awardID}")

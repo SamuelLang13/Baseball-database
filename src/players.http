@@ -1,0 +1,13 @@
+###
+GET localhost:8080/players
+
+###
+POST localhost:8080/players
+Content-Type: application/json
+
+{
+  "firstName": "Bo",
+  "secondName": "Bichette",
+  "baseballPosition": "ShortStop",
+  "dateOfBirth": "5.3.1998"
+}
