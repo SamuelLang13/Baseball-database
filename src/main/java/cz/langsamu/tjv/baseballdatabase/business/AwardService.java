@@ -6,6 +6,7 @@ import cz.langsamu.tjv.baseballdatabase.domain.Award;
 import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -19,9 +20,17 @@ public class AwardService extends AbstractCrudService<Long, Award, AwardReposito
     }
 
     @Override
-    public Optional<Award> exists(Award entity) {
+    public boolean exists(Award entity) {
         Optional<Award> optionalAward = repository.findByName(entity.getName());
-        return Optional.empty();
+        return optionalAward.isPresent();
+    }
+
+    @Override
+    @Transactional
+    public Award update(Long id, Award entity) {
+        Award award = getEntityById(id);
+        award.setName(entity.getName());
+        return award;
     }
 
 }

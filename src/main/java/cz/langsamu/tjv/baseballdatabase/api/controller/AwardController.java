@@ -38,15 +38,14 @@ public class AwardController {
     }
 
     @DeleteMapping("/{awardID}")
-    public void removeAward(@RequestBody AwardDTO awardDTO,@PathVariable Long awardID){
+    public void removeAward(@PathVariable Long awardID){
         awardService.deleteById(awardID);
     }
 
     @PutMapping("/{awardsID}")
     public AwardDTO updateAward(@PathVariable Long awardsID,
                               @RequestBody AwardDTO awardDTO){
-        awardService.update(AwardConverter.toModel(awardDTO));
-        return getOneAward(awardDTO.getAwardID());
+        return AwardConverter.fromModel(awardService.update(awardsID,AwardConverter.toModel(awardDTO)));
     }
 
 }

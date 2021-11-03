@@ -92,10 +92,6 @@ public class Player {
         this.baseballPosition = baseballPosition;
     }
 
-    public void setPlayerID(Long playerID) {
-        this.playerID = playerID;
-    }
-
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }

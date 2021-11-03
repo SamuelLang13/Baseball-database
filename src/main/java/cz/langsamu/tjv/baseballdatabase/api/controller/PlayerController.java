@@ -38,16 +38,14 @@ public class PlayerController {
     }
 
     @DeleteMapping("/{playerID}")
-    public void removePlayer(@RequestBody Player player, @PathVariable Long playerID){
+    public void removePlayer(@PathVariable Long playerID){
         playerService.deleteById(playerID);
     }
 
     @PutMapping("/{playerID}")
-    public PlayerDTO updatePlayer(@PathVariable("playerID")long id,
+    public PlayerDTO updatePlayer(@PathVariable("playerID")long playerID,
                              @RequestBody PlayerDTO playerDTO) {
-        playerService.update(PlayerConverter.toModel(playerDTO));
-        return getOnePlayer(playerDTO.getPlayerID());
-
+       return PlayerConverter.fromModel(playerService.update(playerID,PlayerConverter.toModel(playerDTO)));
     }
 
 }

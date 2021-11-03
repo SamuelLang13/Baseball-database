@@ -6,6 +6,7 @@ import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -20,8 +21,20 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
     }
 
     @Override
-    public Optional<Player> exists(Player entity) {
-        return repository.findByDateOfBirthAndSecondNameAndFirstName(entity.getDateOfBirth(), entity.getSecondName(), entity.getFirstName());
+    public boolean exists(Player entity) {
+        Optional<Player> optionalPlayer= repository.findByDateOfBirthAndSecondNameAndFirstName(entity.getDateOfBirth(), entity.getSecondName(), entity.getFirstName());
+        return optionalPlayer.isPresent();
+    }
+
+    @Override
+    @Transactional
+    public Player update(Long id, Player entity) {
+        Player player = getEntityById(id);
+        player.setBaseballPosition(player.getBaseballPosition());
+        player.setDateOfBirth(player.getDateOfBirth());
+        player.setFirstName(player.getFirstName());
+        player.setSecondName(player.getSecondName());
+        return player;
     }
 
 }

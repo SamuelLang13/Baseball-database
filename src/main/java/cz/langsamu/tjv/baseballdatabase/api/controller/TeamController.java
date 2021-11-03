@@ -39,15 +39,14 @@ public class TeamController {
     }
 
     @DeleteMapping("/{teamID}")
-    public void removeTeam(@RequestBody TeamDTO teamDTO,@PathVariable Long teamID){
+    public void removeTeam(@PathVariable Long teamID){
         teamService.deleteById(teamID);
     }
 
     @PutMapping("/{teamID}")
     public TeamDTO updateTeam(@PathVariable Long teamID,
                        @RequestBody TeamDTO teamDTO){
-        teamService.update(TeamConverter.toModel(teamDTO));
-        return getOneTeam(teamDTO.getTeamID());
+       return TeamConverter.fromModel(teamService.update(teamID, TeamConverter.toModel(teamDTO)));
     }
 
 }

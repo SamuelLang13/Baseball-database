@@ -5,6 +5,7 @@ import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import cz.langsamu.tjv.baseballdatabase.domain.Team;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -16,8 +17,21 @@ public class TeamService extends AbstractCrudService<Long, Team, TeamRepository>
     }
 
     @Override
-    public Optional<Team> exists(Team entity) {
-        return repository.findByName(entity.getName());
+    public boolean exists(Team entity) {
+        Optional<Team> optionalTeam = repository.findByName(entity.getName());
+        return  optionalTeam.isPresent();
     }
+
+    @Override
+    @Transactional
+    public Team update(Long id, Team entity){
+        Team team = getEntityById(id);
+        team.setYearOfEstablish(entity.getYearOfEstablish());
+        team.setNumOfWorldSeriesWin(entity.getNumOfWorldSeriesWin());
+        team.setName(entity.getName());
+        team.setLeague(entity.getLeague());
+        return team;
+    }
+
 
 }

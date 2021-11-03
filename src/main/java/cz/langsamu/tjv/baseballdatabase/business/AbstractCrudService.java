@@ -15,7 +15,15 @@ public abstract class AbstractCrudService<K,E,REPOSITORY extends JpaRepository<E
         this.repository = repository;
     }
 
-   public abstract Optional<E> exists(E entity);
+   public abstract boolean exists(E entity);
+
+    public E getEntityById(K id) {
+        Optional<E> entity = repository.findById(id);
+        if(entity.isEmpty()) {
+            throw new RuntimeException();
+        }
+        return entity.get();
+    }
 
 
     public Optional<E> readById(K id) {
@@ -23,12 +31,7 @@ public abstract class AbstractCrudService<K,E,REPOSITORY extends JpaRepository<E
     }
 
     @Transactional
-    public void update(E entity) throws EntityStateException {
-        if (exists(entity).isEmpty())
-            repository.save(entity);
-        else
-            throw new EntityStateException(entity);
-    }
+    public abstract E update(Long id,E entity);
 
     public void deleteById(K id) {
         repository.deleteById(id);
@@ -36,7 +39,7 @@ public abstract class AbstractCrudService<K,E,REPOSITORY extends JpaRepository<E
 
     @Transactional
     public E create(E entity) throws EntityStateException {
-        if (exists(entity).isPresent())
+        if (exists(entity))
             throw new EntityStateException(entity);
         return repository.save(entity);
     }
