@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-@Controller
+@RestController
 @RequestMapping("/teams")
 public class TeamController {
 
@@ -22,28 +22,28 @@ public class TeamController {
     }
 
 
-    @GetMapping("/teams")
+    @GetMapping
     public Collection<TeamDTO> getAllTeams(){
         return TeamConverter.fromModels(teamService.readAll());
     }
 
-    @PostMapping("/teams/{teamID}")
+    @PostMapping("/{teamID}")
     public TeamDTO getOneTeam(@PathVariable Long teamID){
         return TeamConverter.fromModel(teamService.readById(teamID).orElseThrow(NoEntityFoundException::new));
     }
 
-    @PostMapping("/teams}")
+    @PostMapping
     public TeamDTO registerNewTeam(@RequestBody TeamDTO teamDTO){
-        teamService.create(TeamConverter.toModel(teamDTO));
-        return getOneTeam(teamDTO.getTeamID());
+       return TeamConverter.fromModel(teamService.create(TeamConverter.toModel(teamDTO)));
+
     }
 
-    @DeleteMapping("/teams/{teamID}")
+    @DeleteMapping("/{teamID}")
     public void removeTeam(@RequestBody TeamDTO teamDTO,@PathVariable Long teamID){
         teamService.deleteById(teamID);
     }
 
-    @PutMapping("/teams/{teamID}")
+    @PutMapping("/{teamID}")
     public TeamDTO updateTeam(@PathVariable Long teamID,
                        @RequestBody TeamDTO teamDTO){
         teamService.update(TeamConverter.toModel(teamDTO));

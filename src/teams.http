@@ -1,0 +1,12 @@
+###
+GET localhost:8080/teams
+
+###
+POST localhost:8080/teams
+{
+	"name":"Los Angels  Dodgers",
+	"league":"AmericanLeague",
+	"yearOfEstablish":"1972",
+	"numOfWorldSeriesWin":"2"
+
+}

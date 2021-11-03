@@ -21,29 +21,29 @@ public class AwardController {
         this.awardService = awardService;
     }
 
-    @GetMapping("/awards")
+    @GetMapping
     public Collection<AwardDTO> getAwards(){
         return AwardConverter.fromModels(awardService.readAll());
     }
 
-    @PostMapping("/awards/{awardID}")
+    @PostMapping("/{awardID}")
     public AwardDTO getOneAward(@PathVariable Long awardID){
         return AwardConverter.fromModel(awardService.readById(awardID).orElseThrow(NoEntityFoundException::new));
     }
 
-    @PostMapping("/awards}")
+    @PostMapping
     public AwardDTO registerNewAward(@RequestBody AwardDTO awardDTO){
         awardService.create(AwardConverter.toModel(awardDTO));
         return getOneAward(awardDTO.getAwardID());
     }
 
-    @DeleteMapping("/awards/{awardID}")
+    @DeleteMapping("/{awardID}")
     public void removeAward(@RequestBody AwardDTO awardDTO,@PathVariable Long awardID){
         awardService.deleteById(awardID);
     }
 
-    @PutMapping("/teams/{teamID}")
-    public AwardDTO updateAward(@PathVariable Long teamID,
+    @PutMapping("/{awardsID}")
+    public AwardDTO updateAward(@PathVariable Long awardsID,
                               @RequestBody AwardDTO awardDTO){
         awardService.update(AwardConverter.toModel(awardDTO));
         return getOneAward(awardDTO.getAwardID());

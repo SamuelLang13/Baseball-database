@@ -2,6 +2,7 @@ package cz.langsamu.tjv.baseballdatabase.domain;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -20,8 +21,24 @@ public class Player {
     //@Column(nullable = false)
     private BaseballPositions baseballPosition;
 
+    private LocalDate dateOfBirth;
+
+    public Player(String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Team team) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Player(String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+    }
+
     @ManyToOne
-    @JoinColumn(name = "teamID",nullable = false)
+    @JoinColumn(name = "teamID",nullable = true)
     private  Team team;
 
     @ManyToMany
@@ -73,6 +90,18 @@ public class Player {
 
     public void setBaseballPosition(BaseballPositions baseballPosition) {
         this.baseballPosition = baseballPosition;
+    }
+
+    public void setPlayerID(Long playerID) {
+        this.playerID = playerID;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override

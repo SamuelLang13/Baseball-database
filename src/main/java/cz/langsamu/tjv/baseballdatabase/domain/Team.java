@@ -9,24 +9,15 @@ import java.util.Set;
 @Table
 public class Team {
     @Id
-    @SequenceGenerator(
-            name="team_sequence",
-            sequenceName = "team_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "team_sequence"
-
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long teamID;
     //@Column(nullable = false)
     private String name;
     //@Column(nullable = false)
     private Leagues league;
-    //@Column(nullable = false)
+    @Column(columnDefinition = "number", nullable = false)
     private Date yearOfEstablish;
-    //@Column(nullable = false)
+    @Column(columnDefinition = "number", nullable = false)
     private int numOfWorldSeriesWin;
 
     public Team(Long id, String name, Leagues league, Date yearOfEstablish, int numOfWorldSeriesWin) {

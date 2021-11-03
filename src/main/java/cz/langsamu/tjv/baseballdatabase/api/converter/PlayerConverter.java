@@ -12,7 +12,7 @@ public class PlayerConverter {
     }
 
     public static PlayerDTO fromModel(Player player){
-        return new PlayerDTO(player.getPlayerID(),player.getFirstName(), player.getSecondName(), player.getBaseballPosition());
+        return new PlayerDTO(player.getPlayerID(),player.getFirstName(), player.getSecondName(), player.getBaseballPosition(),player.getDateOfBirth());
     }
 
     public static Collection<Player> toModels(Collection<PlayerDTO> playerDTO){

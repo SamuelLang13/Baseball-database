@@ -22,28 +22,27 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @GetMapping("/players")
+    @GetMapping
     public Collection<PlayerDTO> getPlayers(){
         return PlayerConverter.fromModels(playerService.readAll());
     }
 
-    @PostMapping("/players")
-    public PlayerDTO registerNewPlayer(@RequestBody PlayerDTO playerDTO){
-        playerService.create(PlayerConverter.toModel(playerDTO));
-        return getOnePlayer(playerDTO.getPlayerID());
-    }
-
-    @DeleteMapping("/players/{playerID}")
-    public void removePlayer(@RequestBody Player player, @PathVariable Long playerID){
-        playerService.deleteById(playerID);
-    }
-
-    @PostMapping("/players/{playerID}")
+    @PostMapping("/{playerID}")
     public PlayerDTO getOnePlayer(@PathVariable Long playerID){
         return PlayerConverter.fromModel(playerService.readById(playerID).orElseThrow(NoEntityFoundException::new));
     }
 
-    @PutMapping("/players/{playerID}")
+    @PostMapping
+    public PlayerDTO registerNewPlayer(@RequestBody PlayerDTO playerDTO){
+        return PlayerConverter.fromModel(playerService.create(PlayerConverter.toModel(playerDTO)));
+    }
+
+    @DeleteMapping("/{playerID}")
+    public void removePlayer(@RequestBody Player player, @PathVariable Long playerID){
+        playerService.deleteById(playerID);
+    }
+
+    @PutMapping("/{playerID}")
     public PlayerDTO updatePlayer(@PathVariable("playerID")long id,
                              @RequestBody PlayerDTO playerDTO) {
         playerService.update(PlayerConverter.toModel(playerDTO));
