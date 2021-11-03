@@ -14,8 +14,8 @@ public class Award {
 
     @ManyToMany
     @JoinTable(name = "player_award_table",
-                joinColumns=@JoinColumn(name = "playerID"),
-                inverseJoinColumns = @JoinColumn(name = "awardID"))
+                joinColumns=@JoinColumn(name = "player_playerid"),
+                inverseJoinColumns = @JoinColumn(name = "award_awardid"))
     private final Set<Player> players = new HashSet<>();
 
 

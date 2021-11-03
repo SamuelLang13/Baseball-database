@@ -38,13 +38,13 @@ public class Player {
     }
 
     @ManyToOne
-    @JoinColumn(name = "teamID",nullable = true)
+    @JoinColumn(name = "team_teamid",nullable = true)
     private  Team team;
 
     @ManyToMany
     @JoinTable(name = "player_award_table",
-            joinColumns=@JoinColumn(name = "awardID"),
-            inverseJoinColumns = @JoinColumn(name = "playerID"))
+            joinColumns=@JoinColumn(name = "award_awardid"),
+            inverseJoinColumns = @JoinColumn(name = "player_playerid"))
     private final Set<Award> awards = new HashSet<>();
 
     public Player(){
