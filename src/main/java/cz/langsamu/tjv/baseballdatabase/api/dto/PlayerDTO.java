@@ -2,7 +2,9 @@ package cz.langsamu.tjv.baseballdatabase.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
+import cz.langsamu.tjv.baseballdatabase.domain.Award;
 import cz.langsamu.tjv.baseballdatabase.domain.BaseballPositions;
+import cz.langsamu.tjv.baseballdatabase.domain.Team;
 
 import java.time.LocalDate;
 
@@ -19,13 +21,19 @@ public class PlayerDTO {
     @JsonView(PlayerView.Public.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d.M.yyyy")
     private LocalDate dateOfBirth;
+    @JsonView(PlayerView.Public.class)
+    private Long teamID;
+    private Team team;
+//    private Long awardID;
+//    private Award award;
 
-    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth) {
+    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID) {
         this.playerID = playerID;
         this.firstName = firstName;
         this.secondName = secondName;
         this.baseballPosition = baseballPosition;
         this.dateOfBirth = dateOfBirth;
+        this.teamID = teamID;
     }
 
     public PlayerDTO(){
@@ -70,5 +78,17 @@ public class PlayerDTO {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public Long getTeamID() {
+        return teamID;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Team getTeam() {
+        return team;
     }
 }

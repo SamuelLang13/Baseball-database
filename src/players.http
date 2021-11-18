@@ -9,5 +9,6 @@ Content-Type: application/json
   "firstName": "Bo",
   "secondName": "Bichette",
   "baseballPosition": "ShortStop",
-  "dateOfBirth": "5.3.1998"
+  "dateOfBirth": "5.3.1998",
+  "teamID": "24"
 }

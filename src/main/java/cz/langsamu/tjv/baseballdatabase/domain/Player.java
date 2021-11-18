@@ -20,48 +20,26 @@ public class Player {
     private String secondName;
     //@Column(nullable = false)
     private BaseballPositions baseballPosition;
-
     private LocalDate dateOfBirth;
-
-    public Player(String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Team team) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.baseballPosition = baseballPosition;
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Player(String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.baseballPosition = baseballPosition;
-        this.dateOfBirth = dateOfBirth;
-    }
-
     @ManyToOne
-    @JoinColumn(name = "team_teamid",nullable = true)
+    @JoinColumn(name = "team_teamid",nullable = false)
     private  Team team;
-
     @ManyToMany
     @JoinTable(name = "player_award_table",
             joinColumns=@JoinColumn(name = "award_awardid"),
             inverseJoinColumns = @JoinColumn(name = "player_playerid"))
     private final Set<Award> awards = new HashSet<>();
 
+    public Player(String firstName, String secondName, BaseballPositions baseballPosition,LocalDate dateOfBirth, Team team) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+        this.team = team;
+    }
+
     public Player(){
 
-    }
-
-    public Player(Long id, String first_name, String second_name, BaseballPositions baseballPosition) {
-        this.playerID = id;
-        this.firstName = first_name;
-        this.secondName = second_name;
-        this.baseballPosition = baseballPosition;
-    }
-
-    public Player(String first_name, String second_name, BaseballPositions baseballPosition) {
-        this.firstName = first_name;
-        this.secondName = second_name;
-        this.baseballPosition = baseballPosition;
     }
 
     public Long getPlayerID() {
@@ -98,6 +76,11 @@ public class Player {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public long getTeamID() {
+        //return 24;
+        return team.getTeamID();
     }
 
     @Override

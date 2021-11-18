@@ -6,6 +6,7 @@ import cz.langsamu.tjv.baseballdatabase.api.dto.PlayerDTO;
 import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.business.PlayerService;
 import cz.langsamu.tjv.baseballdatabase.domain.Player;
+import cz.langsamu.tjv.baseballdatabase.domain.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,8 @@ public class PlayerController {
 
     @PostMapping
     public PlayerDTO registerNewPlayer(@RequestBody PlayerDTO playerDTO){
+        Team team = playerService.findTeam(playerDTO.getTeamID());
+        playerDTO.setTeam(team);
         return PlayerConverter.fromModel(playerService.create(PlayerConverter.toModel(playerDTO)));
     }
 
