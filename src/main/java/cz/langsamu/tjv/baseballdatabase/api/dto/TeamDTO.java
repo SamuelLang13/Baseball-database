@@ -1,6 +1,5 @@
 package cz.langsamu.tjv.baseballdatabase.api.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import cz.langsamu.tjv.baseballdatabase.domain.Leagues;
 

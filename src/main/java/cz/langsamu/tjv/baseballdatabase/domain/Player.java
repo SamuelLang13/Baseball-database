@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -13,29 +14,34 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long playerID;
-
-    //@Column(nullable = false)
     private String firstName;
-    //@Column(nullable = false)
     private String secondName;
-    //@Column(nullable = false)
     private BaseballPositions baseballPosition;
     private LocalDate dateOfBirth;
     @ManyToOne
-    @JoinColumn(name = "team_teamid",nullable = false)
-    private  Team team;
+    @JoinColumn(name = "teamid")
+    private Team team;
     @ManyToMany
     @JoinTable(name = "player_award_table",
-            joinColumns=@JoinColumn(name = "award_awardid"),
-            inverseJoinColumns = @JoinColumn(name = "player_playerid"))
-    private final Set<Award> awards = new HashSet<>();
+            joinColumns=@JoinColumn(name = "awardid"),
+            inverseJoinColumns = @JoinColumn(name = "playerid"))
+    private Set<Award> awards = new HashSet<>();
 
     public Player(String firstName, String secondName, BaseballPositions baseballPosition,LocalDate dateOfBirth, Team team) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.baseballPosition = baseballPosition;
         this.dateOfBirth = dateOfBirth;
-        this.team = team;
+        this.team = Objects.requireNonNull(team);
+    }
+
+    public Player(String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Team team, Set<Award> awards) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+        this.team = Objects.requireNonNull(team);
+        this.awards = awards;
     }
 
     public Player(){
@@ -79,9 +85,18 @@ public class Player {
     }
 
     public long getTeamID() {
-        //return 24;
         return team.getTeamID();
     }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public Set<Award> getAwards() {
+        return awards;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

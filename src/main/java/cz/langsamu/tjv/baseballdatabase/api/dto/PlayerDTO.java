@@ -6,7 +6,12 @@ import cz.langsamu.tjv.baseballdatabase.domain.Award;
 import cz.langsamu.tjv.baseballdatabase.domain.BaseballPositions;
 import cz.langsamu.tjv.baseballdatabase.domain.Team;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 public class PlayerDTO {
 
@@ -23,9 +28,11 @@ public class PlayerDTO {
     private LocalDate dateOfBirth;
     @JsonView(PlayerView.Public.class)
     private Long teamID;
+    @JsonView(PlayerView.Public.class)
     private Team team;
-//    private Long awardID;
-//    private Award award;
+    @JsonView(PlayerView.Public.class)
+    private Set<Award> awards;
+    private List<Long> awardIDs;
 
     public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID) {
         this.playerID = playerID;
@@ -36,7 +43,40 @@ public class PlayerDTO {
         this.teamID = teamID;
     }
 
+    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth,Long teamID, Team team) {
+        this.playerID = playerID;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+        this.teamID = teamID;
+        this.team = team;
+    }
+
+    public PlayerDTO(Long playerID,String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID, Team team, Set<Award> awards) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+        this.teamID = teamID;
+        this.team = team;
+        this.awards = awards;
+    }
+
     public PlayerDTO(){
+
+    }
+
+    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, long teamID, Team team, Set<Award> awards) {
+
+        this.playerID = playerID;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+        this.teamID = teamID;
+        this.team = team;
+        this.awards = awards;
 
     }
 
@@ -91,4 +131,28 @@ public class PlayerDTO {
     public Team getTeam() {
         return team;
     }
+
+    public List<Long> getAwardIDs() {
+        return awardIDs;
+    }
+
+    public void setAwards(Set<Award> awards) {
+        this.awards = awards;
+    }
+
+    public Set<Award> getAwards() {
+        return awards;
+    }
+
+//    public Set<Long> getAwardIDs() {
+//        return awardIDs;
+//    }
+//
+//    public Set<Award> getAwards() {
+//        return awards;
+//    }
+//
+//    public void setAwards(Set<Award> awards) {
+//        this.awards = awards;
+//    }
 }

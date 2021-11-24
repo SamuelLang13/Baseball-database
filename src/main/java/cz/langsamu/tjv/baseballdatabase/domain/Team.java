@@ -11,30 +11,13 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long teamID;
-    //@Column(nullable = false)
     private String name;
-    //@Column(nullable = false)
     private Leagues league;
-    @Column(columnDefinition = "number", nullable = false)
     private Date yearOfEstablish;
-    @Column(columnDefinition = "number", nullable = false)
     private int numOfWorldSeriesWin;
-
-    public Team(Long id, String name, Leagues league, Date yearOfEstablish, int numOfWorldSeriesWin) {
-        this.teamID = id;
-        this.name = name;
-        this.league = league;
-        this.yearOfEstablish = yearOfEstablish;
-        this.numOfWorldSeriesWin = numOfWorldSeriesWin;
-    }
-
-    public Team(Long id, String name, Leagues league, Date yearOfEstablish) {
-        this.teamID = id;
-        this.name = name;
-        this.league = league;
-        this.yearOfEstablish = yearOfEstablish;
-        this.numOfWorldSeriesWin=0;
-    }
+    @OneToMany
+    @JoinColumn(name = "playerid")
+    private Set<Player> players;
 
     public Team(String name, Leagues league, Date yearOfEstablish, int numOfWorldSeriesWin) {
         this.name = name;
@@ -88,6 +71,10 @@ public class Team {
 
     public void setNumOfWorldSeriesWin(int numOfWorldSeriesWin) {
         this.numOfWorldSeriesWin = numOfWorldSeriesWin;
+    }
+
+    public void addPlayer(Player player){
+        players.add(player);
     }
 
 }

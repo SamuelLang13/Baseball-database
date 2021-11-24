@@ -26,7 +26,7 @@ Content-Type: application/json
 GET localhost:8080/awards
 
 ###
-DELETE localhost:8080/awards/18
+DELETE localhost:8080/awards/47
 
 ###
 PUT localhost:8080/awards/21
@@ -34,4 +34,12 @@ Content-Type: application/json
 
 {
   "name": "Silver Slugger Awards"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "MLB Rookie of the year"
 }

@@ -7,7 +7,10 @@ import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AwardService extends AbstractCrudService<Long, Award, AwardRepository>{
@@ -17,6 +20,16 @@ public class AwardService extends AbstractCrudService<Long, Award, AwardReposito
     public AwardService(AwardRepository repository, PlayerRepository playerRepository) {
         super(repository);
         this.playerRepository = playerRepository;
+    }
+
+    public Set<Player> findPlayer(List<Long> awardIDs){
+        Set<Player> players;
+        try {
+            players = new HashSet<>(playerRepository.findAllById(awardIDs));
+        }catch (IllegalArgumentException e){
+            throw new IllegalArgumentException("The award with this ID does not exist");
+        }
+        return players;
     }
 
     @Override

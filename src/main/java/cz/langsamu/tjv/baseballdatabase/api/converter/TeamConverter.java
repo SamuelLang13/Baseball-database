@@ -10,7 +10,7 @@ import java.util.Collection;
 public class TeamConverter {
 
     public static Team toModel(TeamDTO teamDTO){
-        return new Team(teamDTO.getTeamID(), teamDTO.getName(), teamDTO.getLeague(),teamDTO.getYearOfEstablish(),teamDTO.getNumOfWorldSeriesWin());
+        return new Team(teamDTO.getName(), teamDTO.getLeague(),teamDTO.getYearOfEstablish(),teamDTO.getNumOfWorldSeriesWin());
     }
 
     public static TeamDTO fromModel(Team team){

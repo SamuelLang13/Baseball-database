@@ -8,11 +8,11 @@ import java.util.Collection;
 public class PlayerConverter {
 
     public static Player toModel(PlayerDTO playerDTO){
-        return new Player(playerDTO.getFirstName(),playerDTO.getSecondName(),playerDTO.getBaseballPosition(),playerDTO.getDateOfBirth(), playerDTO.getTeam());
+        return new Player(playerDTO.getFirstName(),playerDTO.getSecondName(),playerDTO.getBaseballPosition(),playerDTO.getDateOfBirth(), playerDTO.getTeam(),playerDTO.getAwards());
     }
 
     public static PlayerDTO fromModel(Player player){
-        return new PlayerDTO(player.getPlayerID(),player.getFirstName(), player.getSecondName(), player.getBaseballPosition(),player.getDateOfBirth(), player.getTeamID());
+        return new PlayerDTO(player.getPlayerID(),player.getFirstName(), player.getSecondName(), player.getBaseballPosition(),player.getDateOfBirth(), player.getTeamID(),player.getTeam(),player.getAwards());
     }
 
     public static Collection<Player> toModels(Collection<PlayerDTO> playerDTO){

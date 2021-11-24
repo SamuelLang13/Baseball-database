@@ -14,18 +14,16 @@ public class Award {
 
     @ManyToMany
     @JoinTable(name = "player_award_table",
-                joinColumns=@JoinColumn(name = "player_playerid"),
-                inverseJoinColumns = @JoinColumn(name = "award_awardid"))
-    private final Set<Player> players = new HashSet<>();
-
-
-    public Award(Long awardID, String name) {
-        this.awardID = awardID;
+                joinColumns=@JoinColumn(name = "playerid"),
+                inverseJoinColumns = @JoinColumn(name = "awardid"))
+    private Set<Player> players = new HashSet<>();
+    public Award(String name) {
         this.name = name;
     }
 
-    public Award(String name) {
+    public Award(String name, Set<Player> players) {
         this.name = name;
+        this.players = players;
     }
 
     public Award(){
@@ -38,6 +36,10 @@ public class Award {
 
     public String getName() {
         return name;
+    }
+
+    public Set<Player> getPlayers() {
+        return players;
     }
 
     public void setName(String name) {
