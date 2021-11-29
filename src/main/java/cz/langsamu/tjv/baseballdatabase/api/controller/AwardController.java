@@ -8,6 +8,7 @@ import cz.langsamu.tjv.baseballdatabase.api.dto.TeamDTO;
 import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.business.AwardService;
 import cz.langsamu.tjv.baseballdatabase.domain.Player;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -19,6 +20,7 @@ public class AwardController {
 
     private final AwardService awardService;
 
+    @Autowired
     public AwardController(AwardService awardService) {
         this.awardService = awardService;
     }
@@ -35,8 +37,6 @@ public class AwardController {
 
     @PostMapping
     public AwardDTO registerNewAward(@RequestBody AwardDTO awardDTO){
-        Set<Player> players = awardService.findPlayer(awardDTO.getPlayersIDs());
-        awardDTO.setPlayers(players);
         return AwardConverter.fromModel(awardService.create(AwardConverter.toModel(awardDTO)));
     }
 

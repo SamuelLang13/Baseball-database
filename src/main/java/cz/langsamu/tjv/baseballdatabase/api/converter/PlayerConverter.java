@@ -4,6 +4,7 @@ import cz.langsamu.tjv.baseballdatabase.api.dto.PlayerDTO;
 import cz.langsamu.tjv.baseballdatabase.domain.Player;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class PlayerConverter {
 
@@ -16,11 +17,11 @@ public class PlayerConverter {
     }
 
     public static Collection<Player> toModels(Collection<PlayerDTO> playerDTO){
-        return playerDTO.stream().map(PlayerConverter::toModel).toList();
+        return playerDTO.stream().map(PlayerConverter::toModel).collect(Collectors.toList());
     }
 
     public static Collection<PlayerDTO> fromModels(Collection<Player> player){
-        return player.stream().map(PlayerConverter::fromModel).toList();
+        return player.stream().map(PlayerConverter::fromModel).collect(Collectors.toList());
     }
 
 

@@ -1,19 +1,13 @@
 package cz.langsamu.tjv.baseballdatabase.api.controller;
-
-
 import cz.langsamu.tjv.baseballdatabase.api.converter.PlayerConverter;
 import cz.langsamu.tjv.baseballdatabase.api.dto.PlayerDTO;
 import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.business.PlayerService;
-import cz.langsamu.tjv.baseballdatabase.domain.Award;
-import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import cz.langsamu.tjv.baseballdatabase.domain.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Set;
-
 @RestController
 @RequestMapping("/players")
 public class PlayerController {
@@ -38,9 +32,7 @@ public class PlayerController {
     @PostMapping
     public PlayerDTO registerNewPlayer(@RequestBody PlayerDTO playerDTO){
         Team team = playerService.findTeam(playerDTO.getTeamID());
-        Set<Award> awards = playerService.findAward(playerDTO.getAwardIDs());
         playerDTO.setTeam(team);
-        playerDTO.setAwards(awards);
         return PlayerConverter.fromModel(playerService.create(PlayerConverter.toModel(playerDTO)));
     }
 

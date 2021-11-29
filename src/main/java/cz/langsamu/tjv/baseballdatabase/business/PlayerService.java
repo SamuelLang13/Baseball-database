@@ -1,5 +1,6 @@
 package cz.langsamu.tjv.baseballdatabase.business;
 
+import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.dao.AwardRepository;
 import cz.langsamu.tjv.baseballdatabase.dao.PlayerRepository;
 import cz.langsamu.tjv.baseballdatabase.dao.TeamRepository;
@@ -32,6 +33,28 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
     public boolean exists(Player entity) {
         Optional<Player> optionalPlayer= repository.findByDateOfBirthAndSecondNameAndFirstName(entity.getDateOfBirth(), entity.getSecondName(), entity.getFirstName());
         return optionalPlayer.isPresent();
+    }
+
+    @Transactional
+    public void addAward(Long awardID,Long playerID){
+        Player player = findByIdPlayer(playerID);
+        player.addAward(findByIdAward(awardID));
+    }
+
+    public Award findByIdAward(Long awardID){
+        Optional<Award> award = awardRepository.findById(awardID);
+        if(award.isEmpty()){
+            throw  new NoEntityFoundException("The award with this ID does not exist");
+        }
+        return award.get();
+    }
+
+    public Player findByIdPlayer(Long playerID){
+        Optional<Player> player = repository.findById(playerID);
+        if(player.isEmpty()){
+            throw  new NoEntityFoundException("The award with this ID does not exist");
+        }
+        return player.get();
     }
 
     public Team findTeam(Long teamID){

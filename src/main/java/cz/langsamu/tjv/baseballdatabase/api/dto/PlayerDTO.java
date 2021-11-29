@@ -132,27 +132,18 @@ public class PlayerDTO {
         return team;
     }
 
-    public List<Long> getAwardIDs() {
-        return awardIDs;
-    }
-
-    public void setAwards(Set<Award> awards) {
-        this.awards = awards;
-    }
-
-    public Set<Award> getAwards() {
-        return awards;
-    }
-
-//    public Set<Long> getAwardIDs() {
+//    public List<Long> getAwardIDs() {
 //        return awardIDs;
-//    }
-//
-//    public Set<Award> getAwards() {
-//        return awards;
 //    }
 //
 //    public void setAwards(Set<Award> awards) {
 //        this.awards = awards;
 //    }
+//
+    public Set<Award> getAwards() {
+        return awards;
+    }
+
+
+
 }

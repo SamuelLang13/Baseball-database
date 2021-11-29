@@ -30,6 +30,8 @@ public abstract class AbstractCrudService<K,E,REPOSITORY extends JpaRepository<E
         return repository.findById(id);
     }
 
+
+
     @Transactional
     public abstract E update(Long id,E entity);
 

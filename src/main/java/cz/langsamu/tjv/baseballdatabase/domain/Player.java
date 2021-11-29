@@ -19,8 +19,9 @@ public class Player {
     private BaseballPositions baseballPosition;
     private LocalDate dateOfBirth;
     @ManyToOne
-    @JoinColumn(name = "teamid")
+    @JoinColumn
     private Team team;
+
     @ManyToMany
     @JoinTable(name = "player_award_table",
             joinColumns=@JoinColumn(name = "awardid"),
@@ -96,7 +97,9 @@ public class Player {
         return awards;
     }
 
-
+    public void addAward(Award award) {
+        this.awards.add(award);
+    }
 
     @Override
     public boolean equals(Object o) {

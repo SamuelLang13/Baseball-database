@@ -6,6 +6,7 @@ import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import cz.langsamu.tjv.baseballdatabase.domain.Team;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class TeamConverter {
 
@@ -18,11 +19,11 @@ public class TeamConverter {
     }
 
     public static Collection<Team> toModels(Collection<TeamDTO> teamDTO){
-        return  teamDTO.stream().map(TeamConverter::toModel).toList();
+        return  teamDTO.stream().map(TeamConverter::toModel).collect(Collectors.toList());
     }
 
     public static Collection<TeamDTO> fromModels(Collection<Team> team){
-        return team.stream().map(TeamConverter::fromModel).toList();
+        return team.stream().map(TeamConverter::fromModel).collect(Collectors.toList());
     }
 
 }

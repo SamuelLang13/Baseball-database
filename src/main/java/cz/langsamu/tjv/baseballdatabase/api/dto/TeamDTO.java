@@ -70,4 +70,14 @@ public class TeamDTO {
     }
 
 
+    @Override
+    public String toString() {
+        return "TeamDTO{" +
+                "teamID=" + teamID +
+                ", name='" + name + '\'' +
+                ", league=" + league +
+                ", yearOfEstablish=" + yearOfEstablish +
+                ", numOfWorldSeriesWin=" + numOfWorldSeriesWin +
+                '}';
+    }
 }

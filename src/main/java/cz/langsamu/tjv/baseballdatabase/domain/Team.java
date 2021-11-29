@@ -16,7 +16,7 @@ public class Team {
     private Date yearOfEstablish;
     private int numOfWorldSeriesWin;
     @OneToMany
-    @JoinColumn(name = "playerid")
+    @JoinColumn
     private Set<Player> players;
 
     public Team(String name, Leagues league, Date yearOfEstablish, int numOfWorldSeriesWin) {
