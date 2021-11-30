@@ -9,14 +9,14 @@ public class AwardDTO {
     private Long awardID;
     @JsonView(PlayerView.Public.class)
     private String name;
-    private List<String> players;
+    private Set<String> players;
 
     public AwardDTO(Long awardID, String name) {
         this.awardID = awardID;
         this.name = name;
     }
 
-    public AwardDTO(Long awardID, String name, List<String> players) {
+    public AwardDTO(Long awardID, String name, Set<String> players) {
         this.awardID = awardID;
         this.name = name;
         this.players = players;
@@ -38,7 +38,7 @@ public class AwardDTO {
         this.name = name;
     }
 
-    public List<String> getPlayers() {
+    public Set<String> getPlayers() {
         return players;
     }
 }

@@ -13,20 +13,20 @@ public class Team {
     private Long teamID;
     private String name;
     private Leagues league;
-    private Date yearOfEstablish;
+    private int yearOfEstablish;
     private int numOfWorldSeriesWin;
     @OneToMany
     @JoinColumn
     private Set<Player> players;
 
-    public Team(String name, Leagues league, Date yearOfEstablish, int numOfWorldSeriesWin) {
+    public Team(String name, Leagues league, int yearOfEstablish, int numOfWorldSeriesWin) {
         this.name = name;
         this.league = league;
         this.yearOfEstablish = yearOfEstablish;
         this.numOfWorldSeriesWin = numOfWorldSeriesWin;
     }
 
-    public Team(String name, Leagues league, Date yearOfEstablish) {
+    public Team(String name, Leagues league, int yearOfEstablish) {
         this.name = name;
         this.league = league;
         this.yearOfEstablish = yearOfEstablish;
@@ -49,7 +49,7 @@ public class Team {
         return league;
     }
 
-    public Date getYearOfEstablish() {
+    public int getYearOfEstablish() {
         return yearOfEstablish;
     }
 
@@ -65,7 +65,7 @@ public class Team {
         this.league = league;
     }
 
-    public void setYearOfEstablish(Date yearOfEstablish) {
+    public void setYearOfEstablish(int yearOfEstablish) {
         this.yearOfEstablish = yearOfEstablish;
     }
 

@@ -45,8 +45,8 @@ public class Award {
         return players;
     }
 
-    public List<String> getPlayersNames(){
-        List<String> surNames = new ArrayList<>();
+    public Set<String> getPlayersNames(){
+        Set<String> surNames = new HashSet<>();
         for (Player player : players) {
             surNames.add(player.getSecondName());
         }

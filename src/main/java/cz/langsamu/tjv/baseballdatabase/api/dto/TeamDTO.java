@@ -13,11 +13,11 @@ public class TeamDTO {
     @JsonView(TeamView.Public.class)
     private Leagues league;
     @JsonView(TeamView.Public.class)
-    private Date yearOfEstablish;
+    private int yearOfEstablish;
     @JsonView(TeamView.Public.class)
     private int numOfWorldSeriesWin;
 
-    public TeamDTO(Long teamID, String name, Leagues league, Date yearOfEstablish, int numOfWorldSeriesWin) {
+    public TeamDTO(Long teamID, String name, Leagues league, int yearOfEstablish, int numOfWorldSeriesWin) {
         this.teamID = teamID;
         this.name = name;
         this.league = league;
@@ -53,11 +53,11 @@ public class TeamDTO {
         this.league = league;
     }
 
-    public Date getYearOfEstablish() {
+    public int getYearOfEstablish() {
         return yearOfEstablish;
     }
 
-    public void setYearOfEstablish(Date yearOfEstablish) {
+    public void setYearOfEstablish(int yearOfEstablish) {
         this.yearOfEstablish = yearOfEstablish;
     }
 

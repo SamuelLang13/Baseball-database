@@ -26,7 +26,7 @@ public class PlayerDTO {
     @JsonView(PlayerView.Public.class)
     private Team team;
     @JsonView(PlayerView.Public.class)
-    private List<String> awards;
+    private Set<String> awards;
 
     public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID) {
         this.playerID = playerID;
@@ -47,7 +47,7 @@ public class PlayerDTO {
         this.team = team;
     }
 
-    public PlayerDTO(Long playerID,String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID, Team team, List<String> awards) {
+    public PlayerDTO(Long playerID,String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID, Team team, Set<String> awards) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.baseballPosition = baseballPosition;
@@ -61,7 +61,7 @@ public class PlayerDTO {
 
     }
 
-    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, long teamID, Team team, List<String> awards) {
+    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, long teamID, Team team, Set<String> awards) {
 
         this.playerID = playerID;
         this.firstName = firstName;
@@ -126,7 +126,7 @@ public class PlayerDTO {
         return team;
     }
 
-    public List<String> getAwards() {
+    public Set<String> getAwards() {
         return awards;
     }
 

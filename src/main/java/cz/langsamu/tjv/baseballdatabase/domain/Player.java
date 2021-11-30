@@ -98,8 +98,8 @@ public class Player {
         this.awards.add(award);
     }
 
-    public List<String> getAwardsName(){
-        List<String> awardsName = new ArrayList<>();
+    public Set<String> getAwardsName(){
+        Set<String> awardsName = new HashSet<>();
         for (Award award : awards) {
             awardsName.add(award.getName());
         }
