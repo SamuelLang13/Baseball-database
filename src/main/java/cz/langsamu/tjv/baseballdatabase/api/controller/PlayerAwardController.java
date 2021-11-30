@@ -21,7 +21,6 @@ public class PlayerAwardController {
     @PostMapping("/addingPlayerAward")
     public void registerNewPlayerAward(@RequestBody PlayerAwardDTO playerAwardDTO){
         awardService.addPlayer(playerAwardDTO.getPlayerID(),playerAwardDTO.getAwardID());
-        //playerService.addAward(playerAwardDTO.getAwardID(),playerAwardDTO.getPlayerID());
     }
 
 }
