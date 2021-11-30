@@ -1,14 +1,9 @@
 package cz.langsamu.tjv.baseballdatabase.api.dto;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import cz.langsamu.tjv.baseballdatabase.domain.Award;
 import cz.langsamu.tjv.baseballdatabase.domain.BaseballPositions;
 import cz.langsamu.tjv.baseballdatabase.domain.Team;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -31,8 +26,7 @@ public class PlayerDTO {
     @JsonView(PlayerView.Public.class)
     private Team team;
     @JsonView(PlayerView.Public.class)
-    private Set<Award> awards;
-    private List<Long> awardIDs;
+    private List<String> awards;
 
     public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID) {
         this.playerID = playerID;
@@ -53,7 +47,7 @@ public class PlayerDTO {
         this.team = team;
     }
 
-    public PlayerDTO(Long playerID,String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID, Team team, Set<Award> awards) {
+    public PlayerDTO(Long playerID,String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID, Team team, List<String> awards) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.baseballPosition = baseballPosition;
@@ -67,7 +61,7 @@ public class PlayerDTO {
 
     }
 
-    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, long teamID, Team team, Set<Award> awards) {
+    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, long teamID, Team team, List<String> awards) {
 
         this.playerID = playerID;
         this.firstName = firstName;
@@ -132,15 +126,7 @@ public class PlayerDTO {
         return team;
     }
 
-//    public List<Long> getAwardIDs() {
-//        return awardIDs;
-//    }
-//
-//    public void setAwards(Set<Award> awards) {
-//        this.awards = awards;
-//    }
-//
-    public Set<Award> getAwards() {
+    public List<String> getAwards() {
         return awards;
     }
 

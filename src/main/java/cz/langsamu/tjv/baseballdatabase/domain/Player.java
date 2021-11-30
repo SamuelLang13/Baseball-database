@@ -3,10 +3,7 @@ package cz.langsamu.tjv.baseballdatabase.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table
@@ -99,6 +96,14 @@ public class Player {
 
     public void addAward(Award award) {
         this.awards.add(award);
+    }
+
+    public List<String> getAwardsName(){
+        List<String> awardsName = new ArrayList<>();
+        for (Award award : awards) {
+            awardsName.add(award.getName());
+        }
+        return awardsName;
     }
 
     @Override
