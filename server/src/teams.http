@@ -1,0 +1,47 @@
+###
+POST localhost:8080/teams
+Content-Type: application/json
+
+{
+  "name":"Arizona Diamondbacks",
+  "league":"NationalLeague",
+  "yearOfEstablish":"1998",
+  "numOfWorldSeriesWin":"1"
+
+}
+
+###
+POST localhost:8080/teams
+Content-Type: application/json
+
+{
+  "name":"Atlanta Braves",
+  "league":"NationalLeague",
+  "yearOfEstablish":"1876",
+  "numOfWorldSeriesWin":"3"
+
+}
+
+###
+POST localhost:8080/teams
+Content-Type: application/json
+
+{
+  "name":"Baltimore Orioles",
+  "league":"AmericanLeague",
+  "yearOfEstablish":"1901",
+  "numOfWorldSeriesWin":"3"
+
+}
+
+###
+POST localhost:8080/teams
+Content-Type: application/json
+
+{
+  "name":"Boston Red Sox",
+  "league":"AmericanLeague",
+  "yearOfEstablish":"1901",
+  "numOfWorldSeriesWin":"9"
+
+}

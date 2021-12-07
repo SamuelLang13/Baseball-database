@@ -1,0 +1,127 @@
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Most valuable player Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Cy Young Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Rokie of the Year Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Manager of the Year Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Gold Glove Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Silver Slugger Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Aaron Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Clemente Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Relievers of the Year"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Comeback Players of the Year"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Historic Achievement Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Players Choice Award"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "All-MLB Team"
+}
+
+###
+POST localhost:8080/awards
+Content-Type: application/json
+
+{
+  "name": "Golden Slugger Award"
+}
+
+###
+GET localhost:8080/awards
+
+###
+PUT localhost:8080/awards/3
+Content-Type: application/json
+
+{
+  "name": "Rookie of the Year Award"
+}
+
+###
+DELETE localhost:8080/awards/14
+
+
