@@ -42,7 +42,7 @@ public class PlayerView {
         if(e instanceof WebClientResponseException.Conflict){
             System.err.println(AnsiOutput.toString(
                     AnsiColor.RED
-                    , "Cannot create - user already exist",
+                    , "Cannot create - player already exist",
                     AnsiColor.DEFAULT));
         }else{
             printErrorGeneric(e);
@@ -53,18 +53,18 @@ public class PlayerView {
         if (e instanceof WebClientResponseException.NotFound) {
             System.err.println(AnsiOutput.toString(
                     AnsiColor.RED
-                    , "Cannot update - user does not exist",
+                    , "Cannot update - player does not exist",
                     AnsiColor.DEFAULT));
         } else{
             printErrorGeneric(e);
         }
     }
 
-    public void printErrorUser(Throwable e) {
+    public void printErrorPlayer(Throwable e) {
         if (e instanceof WebClientResponseException.NotFound) {
             System.err.println(AnsiOutput.toString(
                     AnsiColor.RED
-                    , "Cannot print - user does not exist",
+                    , "Cannot print - player does not exist",
                     AnsiColor.DEFAULT
             ));
         } else

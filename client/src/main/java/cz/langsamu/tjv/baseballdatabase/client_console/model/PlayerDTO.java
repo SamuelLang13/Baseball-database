@@ -34,4 +34,20 @@ public class PlayerDTO {
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
+
+    public void setID(Long ID) {
+        this.ID = ID;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }

@@ -1,4 +1,4 @@
-package cz.langsamu.tjv.baseballdatabase.client_console.ui;
+package cz.langsamu.tjv.baseballdatabase.client_console.ui.console;
 
 import org.springframework.stereotype.Component;
 
