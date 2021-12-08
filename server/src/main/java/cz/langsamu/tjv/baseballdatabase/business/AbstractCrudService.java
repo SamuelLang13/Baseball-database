@@ -36,7 +36,10 @@ public abstract class AbstractCrudService<K,E,REPOSITORY extends JpaRepository<E
     public abstract E update(Long id,E entity);
 
     public void deleteById(K id) {
-        repository.deleteById(id);
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+        }
+        throw new EntityStateException("The team with this id does not exist");
     }
 
     @Transactional
