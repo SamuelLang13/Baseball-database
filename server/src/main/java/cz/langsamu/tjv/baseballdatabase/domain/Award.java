@@ -18,7 +18,7 @@ public class Award {
     @JoinTable(name = "player_award_table",
                 joinColumns=@JoinColumn(name = "playerid"),
                 inverseJoinColumns = @JoinColumn(name = "awardid"))
-    private Set<Player> players = new HashSet<>();
+    public Set<Player> players = new HashSet<>();
 
     public Award(String name) {
         this.name = name;

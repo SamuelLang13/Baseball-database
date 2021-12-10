@@ -49,6 +49,14 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
         return award.get();
     }
 
+    public boolean findById(Long id){
+        Optional<Player> player = repository.findById(id);
+        if(player.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
     public Player findByIdPlayer(Long playerID){
         Optional<Player> player = repository.findById(playerID);
         if(player.isEmpty()){
@@ -86,4 +94,18 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
         return player;
     }
 
+    public void removeAward(Long id, Long awardID) {
+        Optional<Player> player = repository.findById(id);
+        if(player.isEmpty()){
+            throw new IllegalArgumentException("The player does not exist");
+        }
+        Optional<Award> award = awardRepository.findById(awardID);
+        if(award.isEmpty()){
+            throw new IllegalArgumentException("The award does not exist");
+        }
+        if(player.get().awards.contains(award)){
+            throw new IllegalArgumentException("The player does not possesses this award");
+        }
+        player.get().awards.remove(award);
+    }
 }

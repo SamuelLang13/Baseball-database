@@ -23,7 +23,7 @@ public class Player {
     @JoinTable(name = "player_award_table",
             joinColumns=@JoinColumn(name = "awardid"),
             inverseJoinColumns = @JoinColumn(name = "playerid"))
-    private Set<Award> awards = new HashSet<>();
+    public Set<Award> awards = new HashSet<>();
 
     public Player(String firstName, String secondName, BaseballPositions baseballPosition,LocalDate dateOfBirth, Team team) {
         this.firstName = firstName;
