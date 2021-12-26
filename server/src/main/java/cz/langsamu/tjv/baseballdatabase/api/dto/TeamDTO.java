@@ -2,8 +2,10 @@ package cz.langsamu.tjv.baseballdatabase.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import cz.langsamu.tjv.baseballdatabase.domain.Leagues;
+import cz.langsamu.tjv.baseballdatabase.domain.Player;
 
 import java.util.Date;
+import java.util.Set;
 
 public class TeamDTO {
 
@@ -80,4 +82,5 @@ public class TeamDTO {
                 ", numOfWorldSeriesWin=" + numOfWorldSeriesWin +
                 '}';
     }
+
 }

@@ -29,6 +29,17 @@ public class Award {
         this.players = players;
     }
 
+    public Award(Long awardID, String name, Set<Player> players) {
+        this.awardID = awardID;
+        this.name = name;
+        this.players = players;
+    }
+
+    public Award(Long awardID, String name) {
+        this.awardID = awardID;
+        this.name = name;
+    }
+
     public Award(){
 
     }

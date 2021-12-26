@@ -5,7 +5,6 @@ import cz.langsamu.tjv.baseballdatabase.api.dto.TeamDTO;
 import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.business.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;

@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepository> {
@@ -49,14 +46,6 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
         return award.get();
     }
 
-    public boolean findById(Long id){
-        Optional<Player> player = repository.findById(id);
-        if(player.isEmpty()){
-            return false;
-        }
-        return true;
-    }
-
     public Player findByIdPlayer(Long playerID){
         Optional<Player> player = repository.findById(playerID);
         if(player.isEmpty()){
@@ -73,16 +62,6 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
         return optionalTeam.get();
     }
 
-    public Set<Award> findAward(List<Long> awardIDs){
-        Set<Award> awards;
-        try {
-            awards = new HashSet<>(awardRepository.findAllById(awardIDs));
-        }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("The award with this ID does not exist");
-        }
-        return awards;
-    }
-
     @Override
     @Transactional
     public Player update(Long id, Player entity) {
@@ -94,18 +73,4 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
         return player;
     }
 
-    public void removeAward(Long id, Long awardID) {
-        Optional<Player> player = repository.findById(id);
-        if(player.isEmpty()){
-            throw new IllegalArgumentException("The player does not exist");
-        }
-        Optional<Award> award = awardRepository.findById(awardID);
-        if(award.isEmpty()){
-            throw new IllegalArgumentException("The award does not exist");
-        }
-        if(player.get().awards.contains(award)){
-            throw new IllegalArgumentException("The player does not possesses this award");
-        }
-        player.get().awards.remove(award);
-    }
 }

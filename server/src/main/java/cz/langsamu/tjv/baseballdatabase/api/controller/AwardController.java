@@ -2,17 +2,12 @@ package cz.langsamu.tjv.baseballdatabase.api.controller;
 
 
 import cz.langsamu.tjv.baseballdatabase.api.converter.AwardConverter;
-import cz.langsamu.tjv.baseballdatabase.api.converter.TeamConverter;
 import cz.langsamu.tjv.baseballdatabase.api.dto.AwardDTO;
-import cz.langsamu.tjv.baseballdatabase.api.dto.TeamDTO;
 import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.business.AwardService;
-import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/awards")

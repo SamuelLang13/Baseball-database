@@ -8,4 +8,7 @@ public class PlayerAwardConverter {
     public static Collection<PlayerAwardDTO> fromModels() {
         return null;
     }
+    public static Collection<PlayerAwardDTO> toModels() {
+        return null;
+    }
 }

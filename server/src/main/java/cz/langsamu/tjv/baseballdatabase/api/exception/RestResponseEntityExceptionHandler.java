@@ -28,6 +28,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
 
-        return handleExceptionInternal(ex, body, new HttpHeaders(), HttpStatus.CONFLICT, request);
+        return handleExceptionInternal(ex, body, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 }

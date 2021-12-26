@@ -45,3 +45,18 @@ Content-Type: application/json
   "numOfWorldSeriesWin":"9"
 
 }
+
+###
+POST localhost:8080/teams
+Content-Type: application/json
+
+{
+  "name":"Toronto Blue Jays",
+  "league":"AmericanLeague",
+  "yearOfEstablish":"1972",
+  "numOfWorldSeriesWin":"2"
+
+}
+
+###
+GET localhost:8080/teams

@@ -10,7 +10,7 @@ Content-Type: application/json
   "secondName": "Bichette",
   "baseballPosition": "ShortStop",
   "dateOfBirth": "5.3.1998",
-  "teamID": "1"
+  "teamID": "15"
 }
 
 ###
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE localhost:8080/players/80
+DELETE localhost:8080/players/16
 Content-Type: application/json
 
 {

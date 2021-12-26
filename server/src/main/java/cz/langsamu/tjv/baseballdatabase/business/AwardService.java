@@ -8,10 +8,7 @@ import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class AwardService extends AbstractCrudService<Long, Award, AwardRepository>{
@@ -37,30 +34,12 @@ public class AwardService extends AbstractCrudService<Long, Award, AwardReposito
         return award.get();
     }
 
-    public boolean findById(Long id){
-        Optional<Award> award = repository.findById(id);
-        if(award.isEmpty()){
-            return false;
-        }
-        return true;
-    }
-
     public Player findByIdPlayer(Long playerID){
         Optional<Player> player = playerRepository.findById(playerID);
         if(player.isEmpty()){
             throw  new NoEntityFoundException("The award with this ID does not exist");
         }
         return player.get();
-    }
-
-    public Set<Player> findPlayer(List<Long> awardIDs){
-        Set<Player> players;
-        try {
-            players = new HashSet<>(playerRepository.findAllById(awardIDs));
-        }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("The award with this ID does not exist");
-        }
-        return players;
     }
 
     @Override
@@ -77,18 +56,4 @@ public class AwardService extends AbstractCrudService<Long, Award, AwardReposito
         return award;
     }
 
-    public void removePlayer(Long id, Long playerID) {
-        Optional<Award> award = repository.findById(id);
-        if(award.isEmpty()){
-            throw new IllegalArgumentException("The award does not exist");
-        }
-        Optional<Player> player = playerRepository.findById(playerID);
-        if(player.isEmpty()){
-            throw new IllegalArgumentException("The player does not exist");
-        }
-        if(award.get().players.contains(player)){
-            throw new IllegalArgumentException("The award does not possesses this player");
-        }
-        award.get().players.remove(player);
-    }
 }
