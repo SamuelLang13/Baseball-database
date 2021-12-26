@@ -2,6 +2,7 @@ package cz.langsamu.tjv.baseballdatabase.controller;
 
 import cz.langsamu.tjv.baseballdatabase.api.controller.AwardController;
 import cz.langsamu.tjv.baseballdatabase.business.AwardService;
+import cz.langsamu.tjv.baseballdatabase.business.EntityStateException;
 import cz.langsamu.tjv.baseballdatabase.domain.Award;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -56,15 +57,46 @@ public class AwardControllerTests {
     public void testGetOne() throws Exception{
         Award award = new Award(1L,"award");
         Long id = award.getAwardID();
+        // Optional s nasim ocenenim
         Mockito.when(service.readById(id)).thenReturn(Optional.of(award));
+        // JSON reprezentacia ocenenia
         mockMvc.perform(post("/awards/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name",Matchers.is("award")));
+        // Ak je id ine nez "1", vratime prazdny optional
+        Mockito.when(service.readById(not(eq(id)))).thenReturn(Optional.empty());
+        // Ak neexistuje dane ocenie vraciame status NOT_FOUND
+        mockMvc.perform(post("/awards/-1"))
+                .andExpect(status().isNotFound());
 
-        Mockito.when(service.readById(not(eq(1L)))).thenReturn(Optional.empty());
+    }
+
+    @Test
+    public void testDelete() throws Exception{
+
+        Award award = new Award(1L,"award");
+        Long id = award.getAwardID();
+
+        // Overujeme existenciu ocenenia
+        Mockito.when(service.readById(not(eq(id)))).thenReturn(Optional.empty());
+        Mockito.when(service.readById(id)).thenReturn(Optional.of(award));
 
         mockMvc.perform(post("/awards/-1"))
                 .andExpect(status().isNotFound());
+
+        verify(service,never()).deleteById(any());
+
+        mockMvc.perform(delete("/awards/1"))
+                .andExpect(status().isOk());
+        verify(service,times(1)).deleteById(id);
+    }
+
+    @Test
+    public void testCreateExisting() throws Exception{
+
+        doThrow(new EntityStateException()).when(service).create(any(Award.class));
+
+
 
     }
 
