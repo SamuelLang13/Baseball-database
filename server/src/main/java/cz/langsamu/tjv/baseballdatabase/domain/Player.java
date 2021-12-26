@@ -42,6 +42,14 @@ public class Player {
         this.awards = awards;
     }
 
+    public Player(String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+        this.team = null;
+    }
+
     public Player(){
 
     }

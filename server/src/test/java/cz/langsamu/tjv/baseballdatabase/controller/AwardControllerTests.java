@@ -6,10 +6,12 @@ import cz.langsamu.tjv.baseballdatabase.business.EntityStateException;
 import cz.langsamu.tjv.baseballdatabase.domain.Award;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -92,11 +94,45 @@ public class AwardControllerTests {
     }
 
     @Test
-    public void testCreateExisting() throws Exception{
+    public void testCreateNotExisting() throws Exception{
 
         doThrow(new EntityStateException()).when(service).create(any(Award.class));
 
+        mockMvc.perform(post("/awards")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"Most valuable player Award\"}"))
+                .andExpect(status().isConflict());
 
+    }
+
+    @Test
+    public void testCreate() throws Exception{
+
+        Award award = new Award(1L,"award");
+        Long id = award.getAwardID();
+        Mockito.when(service.readById(not(eq(id)))).thenReturn(Optional.empty());
+        Mockito.when(service.readById(id)).thenReturn(Optional.of(award));
+
+//        mockMvc.perform(post("/awards")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content("{\"awardID\":\"1\",\"name\":\"award\"}"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.name",Matchers.is("award")));
+//
+//        ArgumentCaptor<Award> argumentCaptor = ArgumentCaptor.forClass(Award.class);
+//        Mockito.verify(service,Mockito.times(1)).create(argumentCaptor.capture());
+//        Award awardProvidedService = argumentCaptor.getValue();
+//        assertEquals("award",awardProvidedService.getName());
+
+    }
+
+    @Test
+    public void testUpdateNotExisting() throws Exception{
+
+    }
+
+    @Test
+    public void testUpdate() throws Exception{
 
     }
 

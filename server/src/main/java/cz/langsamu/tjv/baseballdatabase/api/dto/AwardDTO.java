@@ -41,4 +41,8 @@ public class AwardDTO {
     public Set<String> getPlayers() {
         return players;
     }
+
+    public void setAwardID(Long awardID) {
+        this.awardID = awardID;
+    }
 }
