@@ -20,10 +20,49 @@ Content-Type: application/json
 "firstName": "Vladimir",
 "secondName": "Guerrero jr.",
 "baseballPosition": "FirstBase",
-"dateOfBirth": "16.3.1999",
-"teamID": "15"
+"dateOfBirth": "16.3.1999"
 }
 
 ###
-DELETE localhost:8080/players/17
+POST localhost:8081/players/15
+
+###
+POST localhost:8081/players
+Content-Type: application/json
+
+{
+  "firstName": "Marcus",
+  "secondName": "Semien",
+  "baseballPosition": "SecondBase",
+  "dateOfBirth": "10.10.1990"
+}
+
+###
+PUT localhost:8081/players/17
+Content-Type: application/json
+
+{
+  "firstName": "Marcus",
+  "secondName": "Semien",
+  "baseballPosition": "ShortStop",
+  "dateOfBirth": "17.9.1990"
+}
+
+###
+POST localhost:8081/players
+Content-Type: application/json
+
+{
+  "firstName": "XYZ",
+  "secondName": "ZZZZ",
+  "baseballPosition": "ShortStop",
+  "dateOfBirth": "5.3.1998"
+}
+
+###
+POST localhost:8081/players/21
+
+###
+DELETE localhost:8081/players/21
+
 

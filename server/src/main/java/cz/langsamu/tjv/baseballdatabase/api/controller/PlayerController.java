@@ -40,7 +40,7 @@ public class PlayerController {
     }
 
     @PutMapping("/{playerID}")
-    public PlayerDTO updatePlayer(@PathVariable("playerID")long playerID,
+    public PlayerDTO updatePlayer(@PathVariable Long playerID,
                              @RequestBody PlayerDTO playerDTO) {
        return PlayerConverter.fromModel(playerService.update(playerID,PlayerConverter.toModel(playerDTO)));
     }

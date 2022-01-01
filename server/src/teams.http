@@ -59,7 +59,19 @@ Content-Type: application/json
 }
 
 ###
+PUT localhost:8080/teams/23
+Content-Type: application/json
+
+{
+  "name":"Atlanta Braves",
+  "league":"NationalLeague",
+  "yearOfEstablish":"1876",
+  "numOfWorldSeriesWin":"4"
+
+}
+
+###
 GET localhost:8080/teams
 
 ###
-DELETE localhost:8080/teams/15
+DELETE localhost:8080/teams/24

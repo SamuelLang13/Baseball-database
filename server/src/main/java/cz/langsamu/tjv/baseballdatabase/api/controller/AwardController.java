@@ -5,7 +5,6 @@ import cz.langsamu.tjv.baseballdatabase.api.converter.AwardConverter;
 import cz.langsamu.tjv.baseballdatabase.api.dto.AwardDTO;
 import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.business.AwardService;
-import cz.langsamu.tjv.baseballdatabase.business.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;

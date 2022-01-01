@@ -66,10 +66,10 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
     @Transactional
     public Player update(Long id, Player entity) {
         Player player = getEntityById(id);
-        player.setBaseballPosition(player.getBaseballPosition());
-        player.setDateOfBirth(player.getDateOfBirth());
-        player.setFirstName(player.getFirstName());
-        player.setSecondName(player.getSecondName());
+        player.setBaseballPosition(entity.getBaseballPosition());
+        player.setDateOfBirth(entity.getDateOfBirth());
+        player.setFirstName(entity.getFirstName());
+        player.setSecondName(entity.getSecondName());
         return player;
     }
 
