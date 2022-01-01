@@ -1,20 +1,19 @@
 ###
-GET localhost:8080/players
+GET localhost:8081/players
 
 ###
-POST localhost:8080/players
+POST localhost:8081/players
 Content-Type: application/json
 
 {
   "firstName": "Bo",
   "secondName": "Bichette",
   "baseballPosition": "ShortStop",
-  "dateOfBirth": "5.3.1998",
-  "teamID": "15"
+  "dateOfBirth": "5.3.1998"
 }
 
 ###
-POST localhost:8080/players
+POST localhost:8081/players
 Content-Type: application/json
 
 {
@@ -22,26 +21,9 @@ Content-Type: application/json
 "secondName": "Guerrero jr.",
 "baseballPosition": "FirstBase",
 "dateOfBirth": "16.3.1999",
-"teamID": "64"
+"teamID": "15"
 }
 
 ###
-DELETE localhost:8080/players/16
-Content-Type: application/json
+DELETE localhost:8080/players/17
 
-{
-
-}
-
-###
-POST localhost:8080/players
-Content-Type: application/json
-
-{
-  "firstName": "Cavan",
-  "secondName": "Biggio",
-  "baseballPosition": "FirstBase",
-  "dateOfBirth": "11.4.1995",
-  "teamID": "64",
-  "awardIDs": ["61"]
-}

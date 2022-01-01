@@ -18,9 +18,19 @@ public class PlayerAwardController {
         this.playerService = playerService;
     }
 
-    @PostMapping("/addingPlayerAward")
-    public void registerNewPlayerAward(@RequestBody PlayerAwardDTO playerAwardDTO){
-        awardService.addPlayer(playerAwardDTO.getPlayerID(),playerAwardDTO.getAwardID());
-        playerService.addAward(playerAwardDTO.getAwardID(),playerAwardDTO.getPlayerID());
+    @PostMapping("/addingPlayerAward/{awardID}/{playerID}")
+    public void registerNewPlayerAward(@PathVariable Long awardID, @PathVariable Long playerID ){
+        playerService.findByIdPlayer(playerID);
+        awardService.findByIdAward(awardID);
     }
+
+//    @DeleteMapping("/deletePlayer/{awardID}")
+//    public void deletePlayer(@PathVariable Long awardID, @RequestBody PlayerAwardDTO playerAwardDTO ){
+//        awardService.deletePlayerId(awardID,playerAwardDTO.getPlayerID());
+//    }
+//
+//    @DeleteMapping("/deleteAward/{playerID}")
+//    public void deleteAward(@PathVariable Long playerID, @RequestBody PlayerAwardDTO playerAwardDTO ){
+//        playerService.deleteAwardId(playerID,playerAwardDTO.getAwardID());
+//    }
 }

@@ -1,5 +1,5 @@
 ###
-POST localhost:8080/awards
+POST localhost:8081/awards
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ###
-POST localhost:8080/awards
+POST localhost:8081/awards
 Content-Type: application/json
 
 {
@@ -111,7 +111,7 @@ Content-Type: application/json
 }
 
 ###
-GET localhost:8080/awards
+GET localhost:8081/awards
 
 ###
 PUT localhost:8080/awards/3
@@ -127,7 +127,5 @@ DELETE localhost:8080/awards/14
 ###
 POST localhost:8080/awards/3
 
-###
-POST localhost:8080/awards/-1
 
 

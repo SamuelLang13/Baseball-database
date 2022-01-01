@@ -1,10 +1,7 @@
 package cz.langsamu.tjv.baseballdatabase.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table
@@ -20,19 +17,18 @@ public class Award {
                 inverseJoinColumns = @JoinColumn(name = "awardid"))
     public Set<Player> players = new HashSet<>();
 
+    public Award() {
+
+    }
+
     public Award(String name) {
         this.name = name;
+        this.players = null;
     }
 
-    public Award(String name, Set<Player> players) {
+    public Award(String name, Set<Player> players){
         this.name = name;
-        this.players = players;
-    }
-
-    public Award(Long awardID, String name, Set<Player> players) {
-        this.awardID = awardID;
-        this.name = name;
-        this.players = players;
+        this. players = players;
     }
 
     public Award(Long awardID, String name) {
@@ -40,35 +36,27 @@ public class Award {
         this.name = name;
     }
 
-    public Award(){
-
-    }
-
-    public Long getAwardID() {
-        return awardID;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public Set<Player> getPlayers() {
-        return players;
-    }
-
-    public Set<String> getPlayersNames(){
-        Set<String> surNames = new HashSet<>();
-        for (Player player : players) {
-            surNames.add(player.getSecondName());
-        }
-        return surNames;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void addPlayer(Player player) {
-        this.players.add(player);
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<Player> players) {
+        this.players = players;
+    }
+
+    public Long getAwardID() {
+        return awardID;
+    }
+
+    public void addPlayer(Player byIdPlayer) {
+        players.add(byIdPlayer);
     }
 }

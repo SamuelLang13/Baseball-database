@@ -5,6 +5,7 @@ import cz.langsamu.tjv.baseballdatabase.api.converter.AwardConverter;
 import cz.langsamu.tjv.baseballdatabase.api.dto.AwardDTO;
 import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.business.AwardService;
+import cz.langsamu.tjv.baseballdatabase.business.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
@@ -25,7 +26,7 @@ public class AwardController {
         return AwardConverter.fromModels(awardService.readAll());
     }
 
-    @PostMapping("/{awardID}")
+    @GetMapping("/{awardID}")
     public AwardDTO getOneAward(@PathVariable Long awardID){
         return AwardConverter.fromModel(awardService.readById(awardID).orElseThrow(NoEntityFoundException::new));
     }
@@ -45,5 +46,6 @@ public class AwardController {
                               @RequestBody AwardDTO awardDTO){
         return AwardConverter.fromModel(awardService.update(awardsID,AwardConverter.toModel(awardDTO)));
     }
+
 
 }

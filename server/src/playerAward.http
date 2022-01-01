@@ -17,10 +17,19 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/PlayerAward/deletePlayersAward/16
+DELETE http://localhost:8080/PlayerAward/deletePlayer/17
 Content-Type: application/json
 
 {
   "awardID": "3",
-  "playerID": "16"
+  "playerID": "17"
+}
+
+###
+DELETE http://localhost:8081/PlayerAward/deletePlayer/3
+Content-Type: application/json
+
+{
+  "awardID": "3",
+  "playerID": "17"
 }

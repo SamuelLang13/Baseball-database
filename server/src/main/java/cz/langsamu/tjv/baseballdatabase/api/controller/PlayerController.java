@@ -31,8 +31,6 @@ public class PlayerController {
 
     @PostMapping
     public PlayerDTO registerNewPlayer(@RequestBody PlayerDTO playerDTO){
-        Team team = playerService.findTeam(playerDTO.getTeamID());
-        playerDTO.setTeam(team);
         return PlayerConverter.fromModel(playerService.create(PlayerConverter.toModel(playerDTO)));
     }
 

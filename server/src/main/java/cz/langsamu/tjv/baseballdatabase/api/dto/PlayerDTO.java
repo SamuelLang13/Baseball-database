@@ -21,115 +21,60 @@ public class PlayerDTO {
     @JsonView(PlayerView.Public.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d.M.yyyy")
     private LocalDate dateOfBirth;
-    @JsonView(PlayerView.Public.class)
-    private Long teamID;
-    @JsonView(PlayerView.Public.class)
-    private Team team;
-    @JsonView(PlayerView.Public.class)
-    private Set<String> awards;
-
-    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID) {
-        this.playerID = playerID;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.baseballPosition = baseballPosition;
-        this.dateOfBirth = dateOfBirth;
-        this.teamID = teamID;
-    }
-
-    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth,Long teamID, Team team) {
-        this.playerID = playerID;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.baseballPosition = baseballPosition;
-        this.dateOfBirth = dateOfBirth;
-        this.teamID = teamID;
-        this.team = team;
-    }
-
-    public PlayerDTO(Long playerID,String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID, Team team, Set<String> awards) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.baseballPosition = baseballPosition;
-        this.dateOfBirth = dateOfBirth;
-        this.teamID = teamID;
-        this.team = team;
-        this.awards = awards;
-    }
 
     public PlayerDTO(){
 
     }
 
-    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, long teamID, Team team, Set<String> awards) {
-
+    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Long teamID, Team team, Set<Award> awards) {
         this.playerID = playerID;
         this.firstName = firstName;
         this.secondName = secondName;
         this.baseballPosition = baseballPosition;
         this.dateOfBirth = dateOfBirth;
-        this.teamID = teamID;
-        this.team = team;
-        this.awards = awards;
-
     }
 
-    public String getFirstName() {
-        return firstName;
+    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth) {
+        this.playerID = playerID;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public Long getPlayerID() {
         return playerID;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getSecondName() {
         return secondName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
     public BaseballPositions getBaseballPosition() {
         return baseballPosition;
-    }
-
-    public void setBaseballPosition(BaseballPositions baseballPosition) {
-        this.baseballPosition = baseballPosition;
-    }
-
-    public void setPlayerID(Long playerID) {
-        this.playerID = playerID;
     }
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public void setBaseballPosition(BaseballPositions baseballPosition) {
+        this.baseballPosition = baseballPosition;
+    }
+
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-
-    public Long getTeamID() {
-        return teamID;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public Set<String> getAwards() {
-        return awards;
-    }
-
-
-
 }

@@ -37,7 +37,7 @@ public class AwardService extends AbstractCrudService<Long, Award, AwardReposito
     public Player findByIdPlayer(Long playerID){
         Optional<Player> player = playerRepository.findById(playerID);
         if(player.isEmpty()){
-            throw  new NoEntityFoundException("The award with this ID does not exist");
+            throw  new NoEntityFoundException("The player with this ID does not exist");
         }
         return player.get();
     }
@@ -55,5 +55,19 @@ public class AwardService extends AbstractCrudService<Long, Award, AwardReposito
         award.setName(entity.getName());
         return award;
     }
+
+    public void deletePlayerId(Long awardID, Long playerID){
+        Optional<Award> award = repository.findById(awardID);
+        if(award.isEmpty()){
+            throw  new NoEntityFoundException("The award with this ID does not exist");
+        }
+        Optional<Player> player = playerRepository.findById(playerID);
+        if(player.isEmpty()){
+            throw  new NoEntityFoundException("The player with this ID does not exist");
+        }
+        //award.get().deletePlayer(player.get());
+        //player.get().deleteAward(award.get());
+    }
+    
 
 }

@@ -1,5 +1,6 @@
 package cz.langsamu.tjv.baseballdatabase.business;
 
+import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -39,7 +40,7 @@ public abstract class AbstractCrudService<K,E,REPOSITORY extends JpaRepository<E
         if(repository.existsById(id)){
             repository.deleteById(id);
         }
-        throw new EntityStateException("The team with this id does not exist");
+        throw new NoEntityFoundException("Does not exist!");
     }
 
     @Transactional
