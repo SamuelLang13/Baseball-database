@@ -1,2 +1,2 @@
 ###
-POST http://localhost:8081/PlayerAward/addingPlayerAward/1/3
+POST http://localhost:8081/PlayerAward/addingPlayerAward/2/1

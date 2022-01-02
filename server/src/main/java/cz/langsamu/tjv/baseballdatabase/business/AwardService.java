@@ -58,15 +58,7 @@ public class AwardService extends AbstractCrudService<Long, Award, AwardReposito
     }
 
     public void deleteAward(Long awardID){
-        Award award = findByIdAward(awardID);
-        Set<Player> playerSet = award.getPlayers();
-        if(!award.getPlayers().isEmpty()){
-            for (Player player : playerSet) {
-                if(player.awards.contains(award)){
-                    player.awards.remove(award);
-                }
-            }
-        }
+
     }
 
 }

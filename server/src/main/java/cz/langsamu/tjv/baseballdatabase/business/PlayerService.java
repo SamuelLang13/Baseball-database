@@ -81,12 +81,6 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
     }
 
     public void deletePlayer(Long playerID){
-        Player player = findByIdPlayer(playerID);
-        Set<Award> awardSet = player.getAwards();
-        for (Award award : awardSet) {
-            if(award.playersSet.contains(player)){
-                award.playersSet.remove(player);
-            }
-        }
+
     }
 }

@@ -35,7 +35,7 @@ public class AwardController {
 
     @DeleteMapping("/{awardID}")
     public void removeAward(@PathVariable Long awardID){
-        awardService.deleteAward(awardID);
+        awardService.deleteById(awardID);
     }
 
     @PutMapping("/{awardsID}")
