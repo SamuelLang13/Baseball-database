@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepository> {
@@ -49,7 +50,7 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
     public Player findByIdPlayer(Long playerID){
         Optional<Player> player = repository.findById(playerID);
         if(player.isEmpty()){
-            throw  new NoEntityFoundException("The award with this ID does not exist");
+            throw  new NoEntityFoundException("The Player with this ID does not exist");
         }
         return player.get();
     }
@@ -73,4 +74,19 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
         return player;
     }
 
+    @Transactional
+    public void addTeam(Long teamID, Long playerID) {
+        Player player = findByIdPlayer(playerID);
+        player.setTeam(findTeam(teamID));
+    }
+
+    public void deletePlayer(Long playerID){
+        Player player = findByIdPlayer(playerID);
+        Set<Award> awardSet = player.getAwards();
+        for (Award award : awardSet) {
+            if(award.playersSet.contains(player)){
+                award.playersSet.remove(player);
+            }
+        }
+    }
 }

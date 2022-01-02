@@ -22,15 +22,7 @@ public class PlayerAwardController {
     public void registerNewPlayerAward(@PathVariable Long awardID, @PathVariable Long playerID ){
         playerService.findByIdPlayer(playerID);
         awardService.findByIdAward(awardID);
+        playerService.addAward(awardID,playerID);
     }
 
-//    @DeleteMapping("/deletePlayer/{awardID}")
-//    public void deletePlayer(@PathVariable Long awardID, @RequestBody PlayerAwardDTO playerAwardDTO ){
-//        awardService.deletePlayerId(awardID,playerAwardDTO.getPlayerID());
-//    }
-//
-//    @DeleteMapping("/deleteAward/{playerID}")
-//    public void deleteAward(@PathVariable Long playerID, @RequestBody PlayerAwardDTO playerAwardDTO ){
-//        playerService.deleteAwardId(playerID,playerAwardDTO.getAwardID());
-//    }
 }

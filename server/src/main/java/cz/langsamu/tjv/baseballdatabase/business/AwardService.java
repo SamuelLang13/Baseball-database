@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AwardService extends AbstractCrudService<Long, Award, AwardRepository>{
@@ -56,18 +57,16 @@ public class AwardService extends AbstractCrudService<Long, Award, AwardReposito
         return award;
     }
 
-    public void deletePlayerId(Long awardID, Long playerID){
-        Optional<Award> award = repository.findById(awardID);
-        if(award.isEmpty()){
-            throw  new NoEntityFoundException("The award with this ID does not exist");
+    public void deleteAward(Long awardID){
+        Award award = findByIdAward(awardID);
+        Set<Player> playerSet = award.getPlayers();
+        if(!award.getPlayers().isEmpty()){
+            for (Player player : playerSet) {
+                if(player.awards.contains(award)){
+                    player.awards.remove(award);
+                }
+            }
         }
-        Optional<Player> player = playerRepository.findById(playerID);
-        if(player.isEmpty()){
-            throw  new NoEntityFoundException("The player with this ID does not exist");
-        }
-        //award.get().deletePlayer(player.get());
-        //player.get().deleteAward(award.get());
     }
-    
 
 }

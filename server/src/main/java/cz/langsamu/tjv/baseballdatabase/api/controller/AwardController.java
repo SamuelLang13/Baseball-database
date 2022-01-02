@@ -1,6 +1,4 @@
 package cz.langsamu.tjv.baseballdatabase.api.controller;
-
-
 import cz.langsamu.tjv.baseballdatabase.api.converter.AwardConverter;
 import cz.langsamu.tjv.baseballdatabase.api.dto.AwardDTO;
 import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
@@ -37,7 +35,7 @@ public class AwardController {
 
     @DeleteMapping("/{awardID}")
     public void removeAward(@PathVariable Long awardID){
-        awardService.deleteById(awardID);
+        awardService.deleteAward(awardID);
     }
 
     @PutMapping("/{awardsID}")

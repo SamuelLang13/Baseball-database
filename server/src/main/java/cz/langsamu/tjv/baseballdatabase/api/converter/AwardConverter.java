@@ -13,7 +13,7 @@ public class AwardConverter {
     }
 
     public static AwardDTO fromModel(Award award){
-        return new AwardDTO(award.getAwardID(), award.getName());
+        return new AwardDTO(award.getAwardID(), award.getName(), award.getPlayersName());
     }
 
     public static Collection<Award> toModels(Collection<AwardDTO> awardDTO){

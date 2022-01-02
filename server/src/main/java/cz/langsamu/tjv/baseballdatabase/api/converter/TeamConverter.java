@@ -15,7 +15,7 @@ public class TeamConverter {
     }
 
     public static TeamDTO fromModel(Team team){
-        return new TeamDTO(team.getTeamID(), team.getName(), team.getLeague(),team.getYearOfEstablish(), team.getNumOfWorldSeriesWin());
+        return new TeamDTO(team.getTeamID(), team.getName(), team.getLeague(),team.getYearOfEstablish(), team.getNumOfWorldSeriesWin(), team.getPlayersName());
     }
 
     public static Collection<Team> toModels(Collection<TeamDTO> teamDTO){

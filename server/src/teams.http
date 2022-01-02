@@ -1,5 +1,5 @@
 ###
-POST localhost:8080/teams
+POST localhost:8081/teams
 Content-Type: application/json
 
 {
@@ -71,7 +71,7 @@ Content-Type: application/json
 }
 
 ###
-GET localhost:8080/teams
+GET localhost:8081/teams
 
 ###
-DELETE localhost:8080/teams/24
+DELETE localhost:8081/teams/26

@@ -15,7 +15,7 @@ public class Award {
     @JoinTable(name = "player_award_table",
                 joinColumns=@JoinColumn(name = "playerid"),
                 inverseJoinColumns = @JoinColumn(name = "awardid"))
-    public Set<Player> players = new HashSet<>();
+    public Set<Player> playersSet = new HashSet<>();
 
     public Award() {
 
@@ -23,12 +23,12 @@ public class Award {
 
     public Award(String name) {
         this.name = name;
-        this.players = null;
+        this.playersSet = Collections.EMPTY_SET;
     }
 
     public Award(String name, Set<Player> players){
         this.name = name;
-        this. players = players;
+        this. playersSet = players;
     }
 
     public Award(Long awardID, String name) {
@@ -45,11 +45,11 @@ public class Award {
     }
 
     public Set<Player> getPlayers() {
-        return players;
+        return playersSet;
     }
 
     public void setPlayers(Set<Player> players) {
-        this.players = players;
+        this.playersSet = players;
     }
 
     public Long getAwardID() {
@@ -57,6 +57,19 @@ public class Award {
     }
 
     public void addPlayer(Player byIdPlayer) {
-        players.add(byIdPlayer);
+        playersSet.add(byIdPlayer);
+    }
+
+    public Set<String> getPlayersName(){
+        Set<String> surNames = new HashSet<>();
+        Set<String> empty = new HashSet<>();
+        if(playersSet.isEmpty()){
+           empty.add("No players!");
+           return empty;
+        }
+        for (Player player : playersSet) {
+            surNames.add(player.getFirstName()+" "+player.getSecondName()+" ID: "+player.getPlayerID());
+        }
+        return surNames;
     }
 }

@@ -18,17 +18,15 @@ public class TeamDTO {
     private int yearOfEstablish;
     @JsonView(TeamView.Public.class)
     private int numOfWorldSeriesWin;
+    private Set<String> players;
 
-    public TeamDTO(Long teamID, String name, Leagues league, int yearOfEstablish, int numOfWorldSeriesWin) {
+    public TeamDTO(Long teamID, String name, Leagues league, int yearOfEstablish, int numOfWorldSeriesWin, Set<String> players) {
         this.teamID = teamID;
         this.name = name;
         this.league = league;
         this.yearOfEstablish = yearOfEstablish;
         this.numOfWorldSeriesWin = numOfWorldSeriesWin;
-    }
-
-    public TeamDTO(){
-
+        this.players = players;
     }
 
     public Long getTeamID() {
@@ -71,16 +69,11 @@ public class TeamDTO {
         this.numOfWorldSeriesWin = numOfWorldSeriesWin;
     }
 
-
-    @Override
-    public String toString() {
-        return "TeamDTO{" +
-                "teamID=" + teamID +
-                ", name='" + name + '\'' +
-                ", league=" + league +
-                ", yearOfEstablish=" + yearOfEstablish +
-                ", numOfWorldSeriesWin=" + numOfWorldSeriesWin +
-                '}';
+    public Set<String> getPlayers() {
+        return players;
     }
 
+    public void setPlayers(Set<String> players) {
+        this.players = players;
+    }
 }

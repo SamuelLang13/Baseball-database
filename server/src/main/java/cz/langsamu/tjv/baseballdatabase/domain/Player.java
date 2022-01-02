@@ -37,7 +37,6 @@ public class Player {
         this.baseballPosition = baseballPosition;
         this.dateOfBirth = dateOfBirth;
         this.awards = Collections.EMPTY_SET;
-        this.team = null;
     }
 
     public Long getPlayerID() {
@@ -85,7 +84,7 @@ public class Player {
     }
 
     public void setTeam(Team team) {
-        this.team = team;
+        this.team = Objects.requireNonNull(team);
     }
 
     public void setAwards(Set<Award> awards) {
@@ -95,4 +94,16 @@ public class Player {
     public void addAward(Award byIdAward) {
         awards.add(byIdAward);
     }
+
+    public Set<String> getAwardsName(){
+        Set<String> awardNames = new HashSet<>();
+        for (Award award : awards) {
+            awardNames.add(award.getName()+" ID: "+award.getAwardID());
+        }
+        return awardNames;
+    }
+
+
+
+
 }
