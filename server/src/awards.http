@@ -125,7 +125,7 @@ Content-Type: application/json
 DELETE localhost:8081/awards/2
 
 ###
-POST localhost:8081/awards/4
+GET localhost:8081/awards/1
 
 
 

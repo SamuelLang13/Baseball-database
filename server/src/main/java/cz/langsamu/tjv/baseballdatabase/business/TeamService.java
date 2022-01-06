@@ -66,4 +66,15 @@ public class TeamService extends AbstractCrudService<Long, Team, TeamRepository>
         team.addPlayer(player);
 
     }
+
+    @Override
+    public Team create(Team entity) throws EntityStateException {
+        if(entity.getYearOfEstablish()<1800){
+            throw new EntityStateException("Year can not be less than 1800");
+        }
+        if(entity.getNumOfWorldSeriesWin()<0){
+            throw new EntityStateException("Year can not be less than 1800");
+        }
+        return super.create(entity);
+    }
 }

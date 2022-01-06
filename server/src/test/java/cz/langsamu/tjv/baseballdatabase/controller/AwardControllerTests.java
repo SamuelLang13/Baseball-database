@@ -1,5 +1,6 @@
 package cz.langsamu.tjv.baseballdatabase.controller;
 import cz.langsamu.tjv.baseballdatabase.api.controller.AwardController;
+import cz.langsamu.tjv.baseballdatabase.api.dto.AwardDTO;
 import cz.langsamu.tjv.baseballdatabase.business.AwardService;
 import cz.langsamu.tjv.baseballdatabase.business.EntityStateException;
 import cz.langsamu.tjv.baseballdatabase.domain.Award;
@@ -28,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @WebMvcTest(AwardController.class)
@@ -62,7 +64,7 @@ public class AwardControllerTests {
         // Optional s nasim ocenenim
         Mockito.when(service.readById(id)).thenReturn(Optional.of(award));
         // JSON reprezentacia ocenenia
-        mockMvc.perform(post("/awards/1"))
+        mockMvc.perform(get("/awards/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name",Matchers.is("award")));
         // Ak je id ine nez "1", vratime prazdny optional
@@ -76,21 +78,21 @@ public class AwardControllerTests {
     @Test
     public void testDelete() throws Exception{
 
-//        Award award = new Award(1L,"award");
-//        Long id = award.getAwardID();
-//
-//        // Overujeme existenciu ocenenia
-//        Mockito.when(service.readById(not(eq(id)))).thenReturn(Optional.empty());
-//        Mockito.when(service.readById(id)).thenReturn(Optional.of(award));
-//
-//        mockMvc.perform(post("/awards/-1"))
-//                .andExpect(status().isNotFound());
-//
-//        verify(service,never()).deleteById(any());
-//
-//        mockMvc.perform(delete("/awards/1"))
-//                .andExpect(status().isOk());
-//        verify(service,times(1)).deleteById(id);
+        Award award = new Award(1L,"award");
+        Long id = award.getAwardID();
+
+        // Overujeme existenciu ocenenia
+        Mockito.when(service.readById(not(eq(id)))).thenReturn(Optional.empty());
+        Mockito.when(service.readById(id)).thenReturn(Optional.of(award));
+
+        mockMvc.perform(get("/awards/-1"))
+                .andExpect(status().isNotFound());
+
+        verify(service,never()).deleteById(any());
+
+        mockMvc.perform(delete("/awards/1"))
+                .andExpect(status().isOk());
+        verify(service,times(1)).deleteById(id);
     }
 
     @Test
@@ -102,33 +104,38 @@ public class AwardControllerTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"Most valuable player Award\"}"))
                 .andExpect(status().isConflict());
-
     }
 
     @Test
     public void testCreate() throws Exception{
 
-//        Award award = new Award(1L,"award");
-//        Long id = award.getAwardID();
-//        Mockito.when(service.readById(not(eq(id)))).thenReturn(Optional.empty());
-//        Mockito.when(service.readById(id)).thenReturn(Optional.of(award));
-//
-//        mockMvc.perform(post("/awards")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content("{\"awardID\":\"1\",\"name\":\"award\"}"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.name",Matchers.is("award")));
-////
-////        ArgumentCaptor<Award> argumentCaptor = ArgumentCaptor.forClass(Award.class);
-////        Mockito.verify(service,Mockito.times(1)).create(argumentCaptor.capture());
-////        Award awardProvidedService = argumentCaptor.getValue();
-////        assertEquals("award",awardProvidedService.getName());
+        Award award = new Award(1L,"award");
+        Long id = award.getAwardID();
+        Mockito.when(service.create(not(eq(award)))).thenReturn(new Award(2L,"award2"));
+        Mockito.when(service.create(award)).thenReturn(award);
 
+        mockMvc.perform(post("/awards")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"award\"}"));
+
+        ArgumentCaptor<Award> argumentCaptor = ArgumentCaptor.forClass(Award.class);
+        Mockito.verify(service,Mockito.times(1)).create(argumentCaptor.capture());
+        Award awardProvidedService = argumentCaptor.getValue();
+        assertEquals("award",awardProvidedService.getName());
     }
 
     @Test
     public void testUpdateNotExisting() throws Exception{
 
+        Award award = new Award(1L,"award");
+        Long id = award.getAwardID();
+        Mockito.when(service.update(1L,(not(eq(award))))).thenReturn(new Award(2L,"award2"));
+        Mockito.when(service.update(1L,award)).thenReturn(award);
+
+//        mockMvc.perform(put("/awards/-1")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content("{\"name\":\"award\"}"))
+//                .andExpect(status().isConflict());
     }
 
     @Test

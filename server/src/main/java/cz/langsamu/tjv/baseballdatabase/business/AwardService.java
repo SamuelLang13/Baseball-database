@@ -56,9 +56,4 @@ public class AwardService extends AbstractCrudService<Long, Award, AwardReposito
         award.setName(entity.getName());
         return award;
     }
-
-    public void deleteAward(Long awardID){
-
-    }
-
 }

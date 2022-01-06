@@ -36,6 +36,15 @@ public class Team {
         this.players = Collections.EMPTY_SET;
     }
 
+    public Team(Long teamID, String name, Leagues league, int yearOfEstablish) {
+        this.teamID = teamID;
+        this.name = name;
+        this.league = league;
+        this.yearOfEstablish = yearOfEstablish;
+        this.numOfWorldSeriesWin=0;
+        this.players = Collections.EMPTY_SET;
+    }
+
     public Team(){
 
     }

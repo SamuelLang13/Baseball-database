@@ -30,6 +30,14 @@ public class Player {
 
     }
 
+    public Player(String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+        this.awards = Collections.EMPTY_SET;
+    }
+
     public Player(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth) {
         this.playerID = playerID;
         this.firstName = firstName;

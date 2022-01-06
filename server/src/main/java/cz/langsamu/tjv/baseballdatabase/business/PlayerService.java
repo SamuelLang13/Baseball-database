@@ -80,7 +80,4 @@ public class PlayerService extends AbstractCrudService<Long, Player, PlayerRepos
         player.setTeam(findTeam(teamID));
     }
 
-    public void deletePlayer(Long playerID){
-
-    }
 }

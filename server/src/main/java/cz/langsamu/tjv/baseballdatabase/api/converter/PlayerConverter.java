@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class PlayerConverter {
 
     public static Player toModel(PlayerDTO playerDTO){
-        return new Player(playerDTO.getPlayerID(), playerDTO.getFirstName(), playerDTO.getSecondName(), playerDTO.getBaseballPosition(),playerDTO.getDateOfBirth());
+        return new Player(playerDTO.getFirstName(), playerDTO.getSecondName(), playerDTO.getBaseballPosition(),playerDTO.getDateOfBirth());
     }
 
     public static PlayerDTO fromModel(Player player){

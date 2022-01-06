@@ -47,7 +47,8 @@ public abstract class AbstractCrudService<K,E,REPOSITORY extends JpaRepository<E
     public E create(E entity) throws EntityStateException {
         if (exists(entity))
             throw new EntityStateException(entity);
-        return repository.save(entity);
+        E e = repository.save(entity);
+        return e;
     }
 
     public Collection<E> readAll() {

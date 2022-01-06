@@ -26,7 +26,7 @@ public class TeamController {
         return TeamConverter.fromModels(teamService.readAll());
     }
 
-    @PostMapping("/{teamID}")
+    @GetMapping("/{teamID}")
     public TeamDTO getOneTeam(@PathVariable Long teamID){
         return TeamConverter.fromModel(teamService.readById(teamID).orElseThrow(NoEntityFoundException::new));
     }

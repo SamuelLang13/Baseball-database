@@ -30,4 +30,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         return handleExceptionInternal(ex, body, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
+
+    @ExceptionHandler(value = {EntityStateException.class})
+    public ResponseEntity<Object> handleTeamYear(RuntimeException ex, WebRequest request) {
+        return handleExceptionInternal(ex, "Year can not be less than 1800", new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
 }

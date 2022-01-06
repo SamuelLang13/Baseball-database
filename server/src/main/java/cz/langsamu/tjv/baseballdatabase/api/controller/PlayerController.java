@@ -24,7 +24,7 @@ public class PlayerController {
         return PlayerConverter.fromModels(playerService.readAll());
     }
 
-    @PostMapping("/{playerID}")
+    @GetMapping("/{playerID}")
     public PlayerDTO getOnePlayer(@PathVariable Long playerID){
         return PlayerConverter.fromModel(playerService.readById(playerID).orElseThrow(NoEntityFoundException::new));
     }
