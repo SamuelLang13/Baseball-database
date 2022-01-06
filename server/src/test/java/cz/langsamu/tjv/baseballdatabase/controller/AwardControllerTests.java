@@ -14,6 +14,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.AdditionalMatchers.not;
@@ -128,14 +130,12 @@ public class AwardControllerTests {
     public void testUpdateNotExisting() throws Exception{
 
         Award award = new Award(1L,"award");
-        Long id = award.getAwardID();
-        Mockito.when(service.update(1L,(not(eq(award))))).thenReturn(new Award(2L,"award2"));
+        Mockito.when(service.update((not(eq(1L))),any())).thenThrow(NoEntityFoundException.class);
         Mockito.when(service.update(1L,award)).thenReturn(award);
-
-//        mockMvc.perform(put("/awards/-1")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content("{\"name\":\"award\"}"))
-//                .andExpect(status().isConflict());
+        mockMvc.perform(put("/awards/-1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":\"award3\"}"))
+                .andExpect(status().isNotFound());
     }
 
     @Test

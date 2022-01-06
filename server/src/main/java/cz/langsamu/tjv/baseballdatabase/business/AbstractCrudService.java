@@ -4,6 +4,7 @@ import cz.langsamu.tjv.baseballdatabase.api.exception.NoEntityFoundException;
 import cz.langsamu.tjv.baseballdatabase.domain.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
@@ -21,7 +22,7 @@ public abstract class AbstractCrudService<K,E,REPOSITORY extends JpaRepository<E
     public E getEntityById(K id) {
         Optional<E> entity = repository.findById(id);
         if(entity.isEmpty()) {
-            throw new RuntimeException();
+            throw new NoEntityFoundException();
         }
         return entity.get();
     }

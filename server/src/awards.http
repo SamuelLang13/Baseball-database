@@ -127,5 +127,11 @@ DELETE localhost:8081/awards/2
 ###
 GET localhost:8081/awards/1
 
+###
+PUT localhost:8081/awards/-1
+Content-Type: application/json
 
+{
+  "name": "Bu"
+}
 
