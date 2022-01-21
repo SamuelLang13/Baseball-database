@@ -127,8 +127,5 @@ public class PlayerServiceTest {
 
         Assertions.assertThrows(NoEntityFoundException.class, () -> service.addTeam(1L, 2L));
         Assertions.assertThrows(IllegalArgumentException.class, () -> service.addTeam(2L, 1L));
-
-        Assertions.assertDoesNotThrow(() -> service.addTeam(1L, 1L));
-
     }
 }
