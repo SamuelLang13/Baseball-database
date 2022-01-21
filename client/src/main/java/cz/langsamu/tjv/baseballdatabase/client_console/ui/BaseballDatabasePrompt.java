@@ -16,8 +16,8 @@ public class BaseballDatabasePrompt implements PromptProvider {
 
     @Override
     public AttributedString getPrompt() {
-        if(playerClient.getCurrentPlayerID() != null) {
-            return new AttributedString(playerClient.getCurrentPlayerID().getSecondName()+":>");
+        if(playerClient.getCurrentPlayer() != null) {
+            return new AttributedString(playerClient.getCurrentPlayer().getSecondName()+":>");
         }
         return new AttributedString("baseball:>");
     }

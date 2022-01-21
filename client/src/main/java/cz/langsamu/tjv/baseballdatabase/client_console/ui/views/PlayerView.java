@@ -15,16 +15,22 @@ import java.util.Collection;
 public class PlayerView {
 
     public static void printAllPlayers(Collection<PlayerDTO> players){
-        players.forEach(playerDTO -> System.out.println("'"+playerDTO.getPlayerID()+"'"+playerDTO.getFirstName()+" "+playerDTO.getSecondName()+" "+playerDTO.getDateOfBirth()));
+        //Referencia na metodu
+        players.forEach(PlayerView::printPlayer);
     }
 
     public static void printPlayer(PlayerDTO playerDTO){
         System.out.println("ID: "+playerDTO.getPlayerID());
         System.out.println("Player's name: "+playerDTO.getFirstName()+" "+playerDTO.getSecondName());
         System.out.println("Date of Birth: "+playerDTO.getDateOfBirth());
+        System.out.println("Positions: "+playerDTO.getBaseballPosition());
     }
 
     public static void printError(Exception error) {
         System.err.println(error.getMessage());
+    }
+
+    public static void printMessage(String message) {
+        System.out.println(message);
     }
 }

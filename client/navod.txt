@@ -1,3 +1,12 @@
-register-player 'Vladimir' 'Guerrero jr.' FirstBase 16.3.1999
+register-player Bo Bichette ShortStop 5.3.1998
 get-player-by-id 1
+get-all-players
+register-player 'Vladimir' 'Guerrero jr.' FirstBase 16.3.1999
+get-all-players
+remove-player
+set-current-player 2
+remove-player
+get-all-players
+update-player
 set-current-player 1
+update-player Bo Bichette ThirdBase 5.3.1998

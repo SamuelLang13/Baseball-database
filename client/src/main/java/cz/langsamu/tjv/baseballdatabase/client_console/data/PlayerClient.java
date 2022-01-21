@@ -1,10 +1,12 @@
 package cz.langsamu.tjv.baseballdatabase.client_console.data;
 
 import cz.langsamu.tjv.baseballdatabase.client_console.model.PlayerDTO;
+import cz.langsamu.tjv.baseballdatabase.client_console.ui.BaseballDatabasePrompt;
 import cz.langsamu.tjv.baseballdatabase.client_console.ui.views.PlayerView;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.shell.jline.PromptProvider;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientException;
@@ -16,27 +18,19 @@ import java.util.Collection;
 public class PlayerClient {
     private final WebClient playerWebClient;
     private final PlayerView playerView;
-    private PlayerDTO currentPlayerID;
+    private PlayerDTO currentPlayer;
 
     public PlayerClient(@Value("${backend_url}") String backedUrl, PlayerView playerView) {
-        playerWebClient = WebClient.create(backedUrl+"/players");
+        playerWebClient = WebClient.create(backedUrl + "/players");
         this.playerView = playerView;
     }
 
-    public PlayerDTO getCurrentPlayerID() {
-        return currentPlayerID;
+    public PlayerDTO getCurrentPlayer() {
+        return currentPlayer;
     }
 
-    public void setCurrentPlayerID(PlayerDTO player){
-        this.currentPlayerID = player;
-        if(currentPlayerID!= null){
-            try{
-                readById(currentPlayerID.getPlayerID());
-            }catch (WebClientException e){
-                this.currentPlayerID=null;
-                throw e;
-            }
-        }
+    public void setCurrentPlayer(PlayerDTO player) {
+        this.currentPlayer = player;
     }
 
     public PlayerDTO create(PlayerDTO user) {
@@ -45,6 +39,8 @@ public class PlayerClient {
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(user)
                 .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        errorResponse -> errorResponse.bodyToMono(String.class).map(RuntimeException::new))
                 .bodyToMono(PlayerDTO.class)
                 .block(Duration.ofSeconds(5));
     }
@@ -53,6 +49,8 @@ public class PlayerClient {
         return playerWebClient.get()
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        errorResponse -> errorResponse.bodyToMono(String.class).map(RuntimeException::new))
                 .bodyToFlux(PlayerDTO.class)
                 .collectList()
                 .block();
@@ -69,20 +67,27 @@ public class PlayerClient {
                 .block();
     }
 
-    public void update(PlayerDTO playerDTO) {
-
+    public PlayerDTO update(PlayerDTO playerDTO) {
+        return playerWebClient.put()
+                .uri("/{id}", currentPlayer.getPlayerID())
+                .bodyValue(playerDTO)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        errorResponse -> errorResponse.bodyToMono(String.class).map(RuntimeException::new))
+                .bodyToMono(PlayerDTO.class)
+                .block();
     }
 
     public void delete() {
-        if(currentPlayerID == null)
-            throw new IllegalStateException("Current player's ID is not set");
         playerWebClient.delete()
-                .uri("/{id}", currentPlayerID)
+                .uri("/{id}", currentPlayer.getPlayerID())
+                .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .toBodilessEntity()
                 .subscribe(
-                        x -> {setCurrentPlayerID(null);},
-                        e -> {PlayerView.printError(new RuntimeException(e));}
+                        x -> setCurrentPlayer(null),
+                        e -> PlayerView.printError(new RuntimeException(e.getMessage()))
                 );
     }
 }
