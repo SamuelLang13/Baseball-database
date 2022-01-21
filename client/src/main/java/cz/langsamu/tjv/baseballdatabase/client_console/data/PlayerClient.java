@@ -3,6 +3,7 @@ package cz.langsamu.tjv.baseballdatabase.client_console.data;
 import cz.langsamu.tjv.baseballdatabase.client_console.model.PlayerDTO;
 import cz.langsamu.tjv.baseballdatabase.client_console.ui.views.PlayerView;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,22 +16,22 @@ import java.util.Collection;
 public class PlayerClient {
     private final WebClient playerWebClient;
     private final PlayerView playerView;
-    private Long currentPlayerID;
+    private PlayerDTO currentPlayerID;
 
-    public PlayerClient(@Value("http://localhost:8080") String backedUrl, PlayerView playerView) {
+    public PlayerClient(@Value("${backend_url}") String backedUrl, PlayerView playerView) {
         playerWebClient = WebClient.create(backedUrl+"/players");
         this.playerView = playerView;
     }
 
-    public Long getCurrentPlayerID(){
+    public PlayerDTO getCurrentPlayerID() {
         return currentPlayerID;
     }
 
-    public void setCurrentPlayerID(Long id){
-        this.currentPlayerID = id;
+    public void setCurrentPlayerID(PlayerDTO player){
+        this.currentPlayerID = player;
         if(currentPlayerID!= null){
             try{
-                readOne();
+                readById(currentPlayerID.getPlayerID());
             }catch (WebClientException e){
                 this.currentPlayerID=null;
                 throw e;
@@ -57,13 +58,13 @@ public class PlayerClient {
                 .block();
     }
 
-    private PlayerDTO readOne() {
-        if(currentPlayerID == null)
-            throw new IllegalStateException("Current player's ID is not set");
+    public PlayerDTO readById(Long id) {
         return playerWebClient.get()
-                .uri("/{id}", currentPlayerID)
+                .uri("/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        errorResponse -> errorResponse.bodyToMono(String.class).map(RuntimeException::new))
                 .bodyToMono(PlayerDTO.class)
                 .block();
     }
@@ -81,7 +82,7 @@ public class PlayerClient {
                 .toBodilessEntity()
                 .subscribe(
                         x -> {setCurrentPlayerID(null);},
-                        e -> {PlayerView.printErrorPlayer(e);}
+                        e -> {PlayerView.printError(new RuntimeException(e));}
                 );
     }
 }

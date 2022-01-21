@@ -8,15 +8,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class BaseballDatabasePrompt implements PromptProvider {
 
-    private PlayerClient playerClient;
+    private final PlayerClient playerClient;
 
     public BaseballDatabasePrompt(PlayerClient playerClient) {
         this.playerClient = playerClient;
     }
 
-
     @Override
     public AttributedString getPrompt() {
-        return null;
+        if(playerClient.getCurrentPlayerID() != null) {
+            return new AttributedString(playerClient.getCurrentPlayerID().getSecondName()+":>");
+        }
+        return new AttributedString("baseball:>");
     }
 }

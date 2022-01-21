@@ -1,26 +1,47 @@
 package cz.langsamu.tjv.baseballdatabase.client_console.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class PlayerDTO {
 
-    public Long ID;
-    public String firstName;
-    public String secondName;
+    private Long playerID;
+    private String firstName;
+    private String secondName;
+    private BaseballPositions baseballPosition;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d.M.yyyy")
-    public LocalDate dateOfBirth;
+    private LocalDate dateOfBirth;
+    private Set<String> awards;
+    private TeamDTO team;
 
-    public PlayerDTO(Long ID, String firstName, String secondName, LocalDate dateOfBirth) {
-        this.ID = ID;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.dateOfBirth = dateOfBirth;
+    public PlayerDTO(){
+
     }
 
-    public Long getID() {
-        return ID;
+    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Set<String> awards, TeamDTO team) {
+        this.playerID = playerID;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+        this.awards = awards;
+        this.team = team;
+    }
+
+    public PlayerDTO(Long playerID, String firstName, String secondName, BaseballPositions baseballPosition, LocalDate dateOfBirth, Set<String> awards) {
+        this.playerID = playerID;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.baseballPosition = baseballPosition;
+        this.dateOfBirth = dateOfBirth;
+        this.awards = awards;
+    }
+
+    public Long getPlayerID() {
+        return playerID;
     }
 
     public String getFirstName() {
@@ -31,12 +52,12 @@ public class PlayerDTO {
         return secondName;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public BaseballPositions getBaseballPosition() {
+        return baseballPosition;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public void setFirstName(String firstName) {
@@ -47,7 +68,31 @@ public class PlayerDTO {
         this.secondName = secondName;
     }
 
+    public void setBaseballPosition(BaseballPositions baseballPosition) {
+        this.baseballPosition = baseballPosition;
+    }
+
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setPlayerID(Long playerID) {
+        this.playerID = playerID;
+    }
+
+    public Set<String> getAwards() {
+        return awards;
+    }
+
+    public void setAwards(Set<String> awards) {
+        this.awards = awards;
+    }
+
+    public TeamDTO getTeam() {
+        return team;
+    }
+
+    public void setTeam(TeamDTO team) {
+        this.team = team;
     }
 }
