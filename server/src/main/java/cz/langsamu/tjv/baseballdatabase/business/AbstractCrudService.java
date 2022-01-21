@@ -27,21 +27,18 @@ public abstract class AbstractCrudService<K,E,REPOSITORY extends JpaRepository<E
         return entity.get();
     }
 
-
     public Optional<E> readById(K id) {
         return repository.findById(id);
     }
-
-
 
     @Transactional
     public abstract E update(Long id,E entity);
 
     public void deleteById(K id) {
-        if(repository.existsById(id)){
-            repository.deleteById(id);
+        if(!repository.existsById(id)){
+            throw new NoEntityFoundException("Does not exist!");
         }
-        throw new NoEntityFoundException("Does not exist!");
+        repository.deleteById(id);
     }
 
     @Transactional
