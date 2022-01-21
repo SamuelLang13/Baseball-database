@@ -1,10 +1,7 @@
 package cz.langsamu.tjv.baseballdatabase.domain;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table
@@ -97,4 +94,16 @@ public class Team {
         return surNames;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Team team = (Team) o;
+        return yearOfEstablish == team.yearOfEstablish && numOfWorldSeriesWin == team.numOfWorldSeriesWin && Objects.equals(teamID, team.teamID) && Objects.equals(name, team.name) && league == team.league;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(teamID, name, league, yearOfEstablish, numOfWorldSeriesWin);
+    }
 }

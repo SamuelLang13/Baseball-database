@@ -140,7 +140,23 @@ public class AwardControllerTests {
 
     @Test
     public void testUpdate() throws Exception{
+        Award award = new Award(1L,"Rookie of the Year Award");
+        Mockito.when(service.update((not(eq(1L))),any())).thenThrow(NoEntityFoundException.class);
+        Mockito.when(service.update(1L,award)).thenReturn(award);
 
+        mockMvc.perform(put("/awards/2")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "  \"name\": \"Rookie of the Year Award\"\n" +
+                                "}"))
+                .andExpect(status().isNotFound());
+
+        mockMvc.perform(put("/awards/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "  \"name\": \"Rookie of the Year Award\"\n" +
+                                "}"))
+                .andExpect(status().isOk());
     }
 
 }

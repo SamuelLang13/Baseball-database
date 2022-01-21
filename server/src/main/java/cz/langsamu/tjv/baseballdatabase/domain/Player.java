@@ -111,7 +111,16 @@ public class Player {
         return awardNames;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(playerID, player.playerID) && Objects.equals(firstName, player.firstName) && Objects.equals(secondName, player.secondName) && baseballPosition == player.baseballPosition && Objects.equals(dateOfBirth, player.dateOfBirth) && Objects.equals(team, player.team);
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerID, firstName, secondName, baseballPosition, dateOfBirth, team);
+    }
 }
