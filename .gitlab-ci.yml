@@ -1,0 +1,35 @@
+stages:
+  - buildFE
+  - buildBE
+  - testBE
+
+before_script:
+  - echo "Start CI/CD building"
+build-gradle:
+  image: openjdk:11
+  stage: buildFE
+  script:
+    - cd client
+    - chmod +x ./gradlew 
+    - ./gradlew assemble --scan
+    - cd ..
+  artifacts:
+    paths:
+      - build/libs/*.jar
+
+build-gradleBE:
+  stage: buildBE
+  script:
+    - cd server 
+    - ./gradlew assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
+
+test-BE:
+  stage: testBE
+  script:
+    - ./gradlew check
+
+after_script:
+  - echo "End CI/CD build"
