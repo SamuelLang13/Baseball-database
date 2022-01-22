@@ -6,7 +6,7 @@ stages:
 before_script:
   - echo "Start CI/CD building"
 build-gradle:
-  image: openjdk:11
+  image: openjdk:16
   stage: buildFE
   script:
     - cd client
