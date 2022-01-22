@@ -11,6 +11,9 @@ public class TeamDTO {
     private int numOfWorldSeriesWin;
     private Set<String> players;
 
+    public TeamDTO() {
+    }
+
     public TeamDTO(Long teamID, String name, Leagues league, int yearOfEstablish, int numOfWorldSeriesWin, Set<String> players) {
         this.teamID = teamID;
         this.name = name;

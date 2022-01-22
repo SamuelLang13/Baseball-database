@@ -17,22 +17,11 @@ import java.util.Collection;
 @Component
 public class PlayerClient {
     private final WebClient playerWebClient;
-    private final PlayerView playerView;
     private PlayerDTO currentPlayer;
 
-    public PlayerClient(@Value("${backend_url}") String backedUrl, PlayerView playerView) {
+    public PlayerClient(@Value("${backend_url}") String backedUrl) {
         playerWebClient = WebClient.create(backedUrl + "/players");
-        this.playerView = playerView;
     }
-
-    public PlayerDTO getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public void setCurrentPlayer(PlayerDTO player) {
-        this.currentPlayer = player;
-    }
-
     public PlayerDTO create(PlayerDTO user) {
         return playerWebClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -45,17 +34,6 @@ public class PlayerClient {
                 .block(Duration.ofSeconds(5));
     }
 
-    public Collection<PlayerDTO> readAll() {
-        return playerWebClient.get()
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .onStatus(HttpStatus::is4xxClientError,
-                        errorResponse -> errorResponse.bodyToMono(String.class).map(RuntimeException::new))
-                .bodyToFlux(PlayerDTO.class)
-                .collectList()
-                .block();
-    }
-
     public PlayerDTO readById(Long id) {
         return playerWebClient.get()
                 .uri("/{id}", id)
@@ -64,6 +42,17 @@ public class PlayerClient {
                 .onStatus(HttpStatus::is4xxClientError,
                         errorResponse -> errorResponse.bodyToMono(String.class).map(RuntimeException::new))
                 .bodyToMono(PlayerDTO.class)
+                .block();
+    }
+
+    public Collection<PlayerDTO> readAll() {
+        return playerWebClient.get()
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        errorResponse -> errorResponse.bodyToMono(String.class).map(RuntimeException::new))
+                .bodyToFlux(PlayerDTO.class)
+                .collectList()
                 .block();
     }
 
@@ -90,4 +79,13 @@ public class PlayerClient {
                         e -> PlayerView.printError(new RuntimeException(e.getMessage()))
                 );
     }
+
+    public PlayerDTO getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(PlayerDTO player) {
+        this.currentPlayer = player;
+    }
+
 }
