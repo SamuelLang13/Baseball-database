@@ -2,6 +2,7 @@ package cz.langsamu.tjv.baseballdatabase.client_console.data;
 
 import cz.langsamu.tjv.baseballdatabase.client_console.model.PlayerDTO;
 import cz.langsamu.tjv.baseballdatabase.client_console.model.TeamDTO;
+import cz.langsamu.tjv.baseballdatabase.client_console.ui.views.PlayerView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,14 @@ public class TeamClient {
 
     public TeamClient(@Value("${backend_url}") String backendUrl) {
         webClient = WebClient.create(backendUrl + "/teams");
+    }
+
+    public TeamDTO getCurrentTeam() {
+        return currentTeam;
+    }
+
+    public void setCurrentTeam(TeamDTO currentTeam) {
+        this.currentTeam = currentTeam;
     }
 
     public TeamDTO registerNewTeam(TeamDTO teamDTO) {
@@ -56,11 +65,27 @@ public class TeamClient {
                 .block();
     }
 
-    public TeamDTO getCurrentTeam() {
-        return currentTeam;
+    public TeamDTO update(TeamDTO teamDTO) {
+        return webClient.put()
+                .uri("/{id}", currentTeam.getTeamID())
+                .bodyValue(teamDTO)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError,
+                        errorResponse -> errorResponse.bodyToMono(String.class).map(RuntimeException::new))
+                .bodyToMono(TeamDTO.class)
+                .block();
     }
 
-    public void setCurrentTeam(TeamDTO currentTeam) {
-        this.currentTeam = currentTeam;
+    public void delete() {
+        webClient.delete()
+                .uri("/{id}", currentTeam.getTeamID())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .toBodilessEntity()
+                .subscribe(
+                        x -> setCurrentTeam(null),
+                        e -> PlayerView.printError(new RuntimeException(e.getMessage()))
+                );
     }
 }
