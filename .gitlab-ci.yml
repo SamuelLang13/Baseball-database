@@ -21,6 +21,7 @@ build-gradleBE:
   stage: buildBE
   script:
     - cd server 
+    - chmod +x ./gradlew 
     - ./gradlew assemble
   artifacts:
     paths:
