@@ -2,16 +2,19 @@ package cz.langsamu.tjv.baseballdatabase.client_console.model;
 
 public class AwardDTO {
 
-    public Long ID;
+    public Long awardID;
     public String name;
 
+    public AwardDTO() {
+    }
+
     public AwardDTO(Long ID, String name) {
-        this.ID = ID;
+        this.awardID = ID;
         this.name = name;
     }
 
-    public Long getID() {
-        return ID;
+    public Long getAwardID() {
+        return awardID;
     }
 
     public String getName() {

@@ -103,7 +103,6 @@ public class PlayerConsole {
         } catch (RuntimeException e) {
             PlayerView.printError(e);
         }
-
     }
 
     private Availability playerSelected() {

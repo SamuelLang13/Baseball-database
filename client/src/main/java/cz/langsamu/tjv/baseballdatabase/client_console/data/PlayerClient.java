@@ -22,6 +22,7 @@ public class PlayerClient {
     public PlayerClient(@Value("${backend_url}") String backedUrl) {
         playerWebClient = WebClient.create(backedUrl + "/players");
     }
+
     public PlayerDTO create(PlayerDTO user) {
         return playerWebClient.post()
                 .contentType(MediaType.APPLICATION_JSON)

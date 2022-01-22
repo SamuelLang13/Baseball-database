@@ -22,7 +22,7 @@ public class PlayerTeamController {
     }
 
     @PostMapping("/addingPlayerTeam/{teamID}/{playerID}")
-    public void registerNewPlayerAward(@PathVariable Long teamID, @PathVariable Long playerID ){
+    public void registerNewPlayerTeam(@PathVariable Long teamID, @PathVariable Long playerID ){
         playerService.findByIdPlayer(playerID);
         teamService.findByIdTeam(teamID);
         playerService.addTeam(teamID,playerID);

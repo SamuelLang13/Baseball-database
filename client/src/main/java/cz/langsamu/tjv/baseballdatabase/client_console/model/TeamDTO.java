@@ -70,4 +70,15 @@ public class TeamDTO {
     public void setPlayers(Set<String> players) {
         this.players = players;
     }
+
+    @Override
+    public String toString() {
+        return "TeamDTO{" +
+                "teamID=" + teamID +
+                ", name='" + name + '\'' +
+                ", league=" + league +
+                ", yearOfEstablish=" + yearOfEstablish +
+                ", numOfWorldSeriesWin=" + numOfWorldSeriesWin +
+                '}';
+    }
 }

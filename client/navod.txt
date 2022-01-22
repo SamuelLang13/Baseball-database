@@ -10,3 +10,8 @@ get-all-players
 update-player
 set-current-player 1
 update-player Bo Bichette ThirdBase 5.3.1998
+register-award 'Golder strudel award'
+register-player-award 1 2
+get-player-by-id 1
+register-new-team 'Arizona DiamondCheeks' NationalLeague 1998 1
+register-new-player-team 1 3
