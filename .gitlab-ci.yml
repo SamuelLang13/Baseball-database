@@ -32,6 +32,8 @@ test-BE:
   image: openjdk:16
   stage: testBE
   script:
+    - cd server 
+    - chmod +x ./gradlew 
     - ./gradlew check
 
 after_script:
